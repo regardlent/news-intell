@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Documentation du projet
+    url: https://github.com/regardlent/news-intell/blob/main/README.md
+    about: Consultez d'abord la documentation avant d'ouvrir une issue.
+  - name: Guide de contribution
+    url: https://github.com/regardlent/news-intell/blob/main/CONTRIBUTING.md
+    about: Comment proposer une modification au projet.
+  - name: Politique de sécurité
+    url: https://github.com/regardlent/news-intell/blob/main/SECURITY.md
+    about: Signalez une vulnérabilité de sécurité (ne pas utiliser pour un bug classique).

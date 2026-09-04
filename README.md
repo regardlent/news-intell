@@ -20,6 +20,7 @@ compatible OpenAI.
 - [Agents IA](#agents-ia)
 - [Structure du projet](#structure-du-projet)
 - [Exemples de sorties](#exemples-de-sorties)
+- [Contribuer](#contribuer)
 - [Licence](#licence)
 
 ---
@@ -148,6 +149,16 @@ news-intell/
 │   ├── sources/rss.py       # Collecte des flux RSS/Atom
 │   └── agents/              # Agents IA + coordinateur
 ├── tests/                   # Tests unitaires
+├── .github/
+│   ├── ISSUE_TEMPLATE/      # Modèles d'issues (bug, fonctionnalité)
+│   ├── PULL_REQUEST_TEMPLATE.md
+│   ├── dependabot.yml
+│   └── workflows/ci.yml     # Intégration continue
+├── CONTRIBUTING.md          # Guide de contribution
+├── CODE_OF_CONDUCT.md       # Code de conduite
+├── SECURITY.md              # Politique de sécurité
+├── CHANGELOG.md             # Journal des modifications
+├── ROADMAP.md               # Feuille de route
 ├── requirements.txt
 ├── .env.example             # Exemple de variables d'environnement
 └── README.md
@@ -175,6 +186,25 @@ Un rapport Markdown ressemble à :
 ```bash
 python -m unittest discover -s tests
 ```
+
+## 🤝 Contribuer
+
+Merci de vouloir contribuer ! Vous trouverez ci-dessous les principaux points
+d'entrée du projet :
+
+- [Guide de contribution](CONTRIBUTING.md) — comment proposer un changement.
+- [Code de conduite](CODE_OF_CONDUCT.md) — les règles de la communauté.
+- [Politique de sécurité](SECURITY.md) — signaler une vulnérabilité.
+- [Journal des modifications](CHANGELOG.md) — l'historique des évolutions.
+- [Feuille de route](ROADMAP.md) — la vision et les prochaines étapes.
+
+Deux types de demandes sont possibles via les modèles fournis :
+
+- 🐛 Rapporter un **bug** ([template](.github/ISSUE_TEMPLATE/bug_report.yml))
+- 💡 Proposer une **fonctionnalité** ([template](.github/ISSUE_TEMPLATE/feature_request.yml))
+
+À chaque ouverture de **pull request**, utilisez le
+[modèle de pull request](.github/PULL_REQUEST_TEMPLATE.md).
 
 ## 📄 Licence
 

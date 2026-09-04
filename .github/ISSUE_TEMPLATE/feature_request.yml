@@ -1,0 +1,34 @@
+name: Demande de fonctionnalité
+description: Proposer une nouvelle fonctionnalité ou une amélioration.
+title: "[Idée] : "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: Merci de décrire votre idée d'amélioration pour le projet.
+  - type: textarea
+    id: probleme
+    attributes:
+      label: Contexte / problème
+      description: Quel problème cette idée résout-elle ?
+      placeholder: Décrivez le contexte…
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Solution proposée
+      description: Décrivez la solution que vous imaginez.
+      placeholder: Décrivez votre idée…
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives envisagées
+      description: Avez-vous envisagé d'autres approches ?
+  - type: textarea
+    id: contexte_additionnel
+    attributes:
+      label: Contexte additionnel
+      description: Captures d'écran, liens, références, etc.

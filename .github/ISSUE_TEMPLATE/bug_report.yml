@@ -1,0 +1,58 @@
+name: Rapport de bug
+description: Signaler un problème ou un comportement inattendu.
+title: "[Bug] : "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Merci de prendre le temps de remplir ce rapport. Toute information
+        complémentaire aide à reproduire et corriger le problème.
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Version du projet concernée (ex. 0.1.0).
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: dropdown
+    id: plateforme
+    attributes:
+      label: Plateforme / système
+      description: Sur quel système utilisez-vous le projet ?
+      options:
+        - Windows
+        - Linux
+        - macOS
+        - Docker
+        - Autre
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description du problème
+      description: Décrivez clairement ce qui se passe.
+      placeholder: Décrivez le problème…
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Étapes pour reproduire
+      description: Indiquez les étapes qui mènent au problème.
+      value: |
+        1. …
+        2. …
+        3. …
+  - type: textarea
+    id: attendu
+    attributes:
+      label: Comportement attendu
+      description: Ce que vous attendiez.
+  - type: input
+    id: contact
+    attributes:
+      label: Contact
+      description: Adresse email (facultatif).
