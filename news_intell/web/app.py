@@ -5,18 +5,22 @@ Lancement :
 """
 from __future__ import annotations
 
+import csv
+import io
 from pathlib import Path
 
 from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
+from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from ..client import LocalAIClient
 from ..config import Config
 from .config_store import ConfigStore
+from .planificateur import planificateur
 from .recherche import rechercher_semantique, rechercher_texte
 from .repository import DepotResultats, _slug
+from .statistiques import calculer_statistiques
 from .taches import taches
 
 ROOT = Path(__file__).resolve().parent
@@ -113,6 +117,28 @@ def creer_app() -> FastAPI:
             return JSONResponse({"erreur": "introuvable"}, status_code=404)
         return JSONResponse(donnees)
 
+    @app.get("/api/export.csv")
+    def api_export():
+        donnees = depot.lister()
+        boucle = io.StringIO()
+        ecrivain = csv.writer(boucle, delimiter=";")
+        ecrivain.writerow([
+            "titre", "source", "thematique", "sentiment", "pertinence",
+            "groupe", "url", "note_analyste",
+        ])
+        for r in donnees:
+            ecrivain.writerow([
+                r.get("titre", ""),
+                r.get("source", ""),
+                r.get("thematique", ""),
+                r.get("sentiment", ""),
+                r.get("pertinence", ""),
+                r.get("groupe", ""),
+                r.get("url", ""),
+                r.get("note_analyste", ""),
+            ])
+        return Response(content=boucle.getvalue(), media_type="text/csv; charset=utf-8")
+
     # --- Administration ---
     @app.get("/admin", response_class=HTMLResponse)
     def admin_index(request: Request):
@@ -124,6 +150,7 @@ def creer_app() -> FastAPI:
                 "nb_articles": len(depot.lister()),
                 "sources": config.sources,
                 "nb_sources": len(config.sources),
+                "stats": calculer_statistiques(depot.lister()),
                 "taches": dict(taches._taches),
             },
         )
@@ -157,6 +184,21 @@ def creer_app() -> FastAPI:
     @app.get("/admin/actualiser")
     def admin_actualiser():
         return RedirectResponse("/admin", status_code=303)
+
+    @app.post("/admin/planifier")
+    def admin_planifier(intervalle: int = 60):
+        try:
+            planificateur.demarrer(intervalle, _lancer_analyse)
+        except ValueError as exc:
+            return JSONResponse({"ok": False, "erreur": str(exc)}, status_code=400)
+        return JSONResponse({"ok": True, "intervalle": intervalle, "statut": "actif"})
+
+    @app.get("/admin/planification")
+    def admin_planification():
+        return JSONResponse({
+            "actif": planificateur.actif(),
+            "intervalle": planificateur.intervalle,
+        })
 
     return app
 

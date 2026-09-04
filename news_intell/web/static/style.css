@@ -46,6 +46,9 @@ button{background:var(--accent);color:#fff;border:0;cursor:pointer}
 .admin-sources table{width:100%;border-collapse:collapse}
 .admin-sources th,.admin-sources td{border:1px solid var(--bord);padding:.5rem;text-align:left}
 .admin-sources th{background:#f0ece4}
+.admin-planifier input{width:90px;padding:.4rem;border:1px solid var(--bord);font-family:inherit}
+.comptes{display:flex;flex-wrap:wrap;gap:.5rem 1rem;list-style:none;padding:0}
+.comptes li{background:#f0ece4;padding:.2rem .6rem;border-radius:3px;font-size:.85rem}
 textarea#config{width:100%;min-height:420px;font-family:ui-monospace,Consolas,monospace;font-size:.9rem;border:1px solid var(--bord);padding:.6rem}
 .vide{text-align:center;color:var(--ton);padding:2rem 0;background:var(--carte);border:1px dashed var(--bord)}
 .pied{background:var(--encre);color:#aaa;padding:1rem 0;margin-top:2rem;font-size:.9rem}

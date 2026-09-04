@@ -14,6 +14,29 @@
   <a class="bouton" href="/admin/actualiser">Actualiser</a>
 </section>
 
+<section class="admin-planifier">
+  <h2>Planification</h2>
+  <label>Intervalle (minutes) <input type="number" id="intervalle" value="60" min="5"></label>
+  <button id="btn-planifier">Planifier une analyse périodique</button>
+  <p id="statut-planif"></p>
+</section>
+
+<section class="admin-stats-detail">
+  <h2>Statistiques</h2>
+  {% if stats.par_source %}
+  <h3>Par source</h3>
+  <ul class="comptes">{% for nom, nb in stats.par_source %}<li>{{ nom }} ({{ nb }})</li>{% endfor %}</ul>
+  <h3>Par thème</h3>
+  <ul class="comptes">{% for nom, nb in stats.par_theme %}<li>{{ nom }} ({{ nb }})</li>{% endfor %}</ul>
+  <h3>Par sentiment</h3>
+  <ul class="comptes">{% for nom, nb in stats.par_sentiment %}<li>{{ nom }} ({{ nb }})</li>{% endfor %}</ul>
+  {% if stats.mots_courants %}<h3>Mots-clés courants</h3><ul class="comptes">{% for mot, nb in stats.mots_courants %}<li>{{ mot }} ({{ nb }})</li>{% endfor %}</ul>{% endif %}
+  <p>Pertinence moyenne : {{ stats.moyenne_pertinence }} · <a class="bouton" href="/api/export.csv">Exporter en CSV</a></p>
+  {% else %}
+  <p>Aucune statistique — lancez une analyse pour alimenter la base.</p>
+  {% endif %}
+</section>
+
 <section class="admin-sources">
   <h2>Sources</h2>
   <table>

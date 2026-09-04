@@ -38,4 +38,17 @@
         .then(function (d) { statut.textContent = d.ok ? '✔ Configuration enregistrée.' : '✖ ' + d.erreur; });
     });
   }
+  // --- Planifier une analyse ---
+  var btnPlan = id('btn-planifier');
+  if (btnPlan) {
+    btnPlan.addEventListener('click', function () {
+      var intervalle = id('intervalle').value;
+      var statut = id('statut-planif');
+      fetch('/admin/planifier?intervalle=' + intervalle, { method: 'POST' })
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          statut.textContent = d.ok ? '✔ Planification activée (toutes les ' + d.intervalle + ' min).' : '✖ ' + d.erreur;
+        });
+    });
+  }
 })();

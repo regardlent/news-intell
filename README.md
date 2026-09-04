@@ -254,6 +254,10 @@ La **recherche** propose un mode **sémantique** (reranker LocalAI avec repli su
 les embeddings). Une **API JSON** est aussi disponible :
 `/api/articles`, `/api/recherche`, `/api/article/{cle}`.
 
+Le panneau d'administration propose en outre : **statistiques** (sources, thèmes,
+sentiments, mots-clés), **export CSV** (`/api/export.csv`) et **planification
+périodique** des analyses (`/admin/planifier`).
+
 ## 📦 Publication de releases
 
 Lancez une publication en créant un tag versionné à partir de `main` :

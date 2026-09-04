@@ -24,6 +24,8 @@ de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 - Commande CLI `serveur` pour lancer l'interface web.
 - Ajout d'une **recherche sémantique** (reranker, repli embeddings) et d'une
   **API JSON** (`/api/articles`, `/api/recherche`, `/api/article/{cle}`).
+- Panneau d'**administration** enrichi : statistiques, **export CSV** et
+  **planification périodique** des analyses.
 
 ### Prévu
 

@@ -26,7 +26,7 @@ forte attention à la simplicité et à la lisibilité.
 - [x] Interface **web** (FastAPI) : lecture journalistique + administration.
 
 ### Phase 3 — Exploitation (à venir 📅)
-- [ ] Planification automatique des analyses (cron / tâche planifiée).
+- [x] Planification automatique des analyses (tâche périodique via l'admin).
 - [ ] Tableau de bord **HTML** enrichi (filtres, recherche, graphiques).
 - [ ] Alertes sur des sujets ou entités d'intérêt.
 - [x] Empaquetage Python (`pyproject.toml`) et workflow de **release GitHub**.
