@@ -1,0 +1,75 @@
+# =============================================================
+# Configuration du projet news-intell
+# -------------------------------------------------------------
+# Point d'entrée vers votre serveur LocalAI (conteneur Docker).
+# Le conteneur « local-ai » est configuré ici :
+#   docker run -p 8080:8080 localai/localai:latest
+# =============================================================
+
+# URL de base de l'API LocalAI (compatible OpenAI).
+base_url: "http://localhost:8080"
+
+# Clé d'API (facultatif si le serveur LocalAI n'exige pas d'auth).
+api_key: ""
+
+# Modèles utilisés (déjà chargés/nommés sur votre serveur).
+modele_embedding: "hal-qwen3-embedding-0.6b"
+modele_reranker: "jina-reranker-v1-base-en"
+
+# Délai d'attente (en secondes) pour chaque appel au serveur.
+timeout: 60
+
+# Langue de travail (toutes les sorties sont produites dans cette langue).
+langue: "fr"
+
+# -------------------------------------------------------------
+# Configuration des agents IA
+# Chaque agent utilise un modèle précis et une température donnée.
+# La clé « _defaut » sert de repli si un agent n'est pas listé.
+# -------------------------------------------------------------
+agents:
+  _defaut:
+    modele: "qwen3-4b"
+    temperature: 0.2
+  resume:
+    modele: "qwen3-4b"
+    temperature: 0.2
+  classification:
+    modele: "granite-4.2-3b-flash"
+    temperature: 0.1
+  sentiment:
+    modele: "granite-4.2-3b-flash"
+    temperature: 0.0
+  entites:
+    modele: "qwen3-1.7b"
+    temperature: 0.1
+  pertinence:
+    modele: "granite-4.2-3b-flash"
+    temperature: 0.0
+
+# -------------------------------------------------------------
+# Sources d'actualité (flux RSS / Atom) à analyser.
+# Adaptez librement cette liste selon vos centres d'intérêt.
+# -------------------------------------------------------------
+sources:
+  - nom: "Le Monde"
+    url: "https://www.lemonde.fr/rss/une.xml"
+    limite: 15
+  - nom: "France 24"
+    url: "https://www.france24.com/fr/rss"
+    limite: 15
+  - nom: "France Info"
+    url: "https://www.francetvinfo.fr/titres.rss"
+    limite: 15
+  - nom: "Les Échos"
+    url: "https://www.lesechos.fr/rss.xml"
+    limite: 10
+  - nom: "Libération"
+    url: "https://www.liberation.fr/rss/"
+    limite: 10
+
+# -------------------------------------------------------------
+# Seuils de sélection (utilisés pour filtrer / pondérer le rapport).
+# -------------------------------------------------------------
+seuils:
+  pertinence_min: 0.5

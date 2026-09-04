@@ -1,0 +1,32 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "news-intell : exécuter le pipeline",
+      "type": "python",
+      "request": "launch",
+      "module": "src.cli",
+      "args": ["executer", "--format", "md"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "news-intell : lister les modèles",
+      "type": "python",
+      "request": "launch",
+      "module": "src.cli",
+      "args": ["lister-modeles"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "news-intell : tests unitaires",
+      "type": "python",
+      "request": "launch",
+      "module": "unittest",
+      "args": ["discover", "-s", "tests"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    }
+  ]
+}

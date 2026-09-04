@@ -1,0 +1,11 @@
+{
+  "python.defaultInterpreterPath": "C:\\Users\\eiden\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+  "python.analysis.extraPaths": ["src"],
+  "files.encoding": "utf8",
+  "python.testing.unittestEnabled": true,
+  "python.testing.unittestArgs": ["discover", "-s", "tests"],
+  "python.testing.pytestEnabled": false,
+  "search.exclude": {
+    "**/data": true
+  }
+}

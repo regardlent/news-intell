@@ -1,0 +1,4 @@
+# Dépendances du projet news-intell.
+# Le projet utilise l'API OpenAI-compatible de LocalAI via HTTP.
+requests>=2.31.0
+PyYAML>=6.0
