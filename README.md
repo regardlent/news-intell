@@ -158,6 +158,12 @@ Le projet intègre aussi un **cœur** d'analyse comportementale :
 - **Travailleurs** (`news_intell/core/workers.py`) : enchaînent par article
   l'analyse de base, la PNL et la rédaction de la note.
 
+Les agents agissent comme des **experts cultivés** (prompts enrichis, cadrage
+rigoureux et nuancé). Le **moteur de modèle** est **pluggable**
+(`news_intell/llm.py`) : serveur **LocalAI** (`backend: "localai"`) ou
+**modèle local personnalisé** chargé en mémoire (`backend: "personnalise"` +
+`modele_personnalise.chemin`), sans dépendre de l'API LocalAI.
+
 L'**analyse sémantique** complète le tout :
 
 - **Déduplication** (`news_intell/semantic.py`) : supprime les articles quasi
@@ -249,6 +255,9 @@ python -m news_intell.cli serveur --port 8000
 
 > Le panneau admin permet de déclencher une analyse et de modifier la
 > configuration (`config/config.yaml`) directement depuis le navigateur.
+
+Un **site vitrine** de présentation/vente est fourni dans `site_vitrine/`
+(landing page statique). Voir `docs/equipe_dev.md` pour l'équipe de développement.
 
 Pour générer **rapidement** un petit jeu d'articles analysés (sans lancer
 l'analyse complète) :

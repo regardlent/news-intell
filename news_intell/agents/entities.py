@@ -7,9 +7,10 @@ from ..models import Article
 from .base import Agent
 
 SYSTEME = (
-    "Tu es un expert français du traitement automatique du langage. "
-    "Extrais de l'article : les personnes, les organisations, les lieux et les mots-clés. "
-    "Réponds uniquement avec un objet JSON au format exact : "
+    "Tu es un expert en traitement du langage naturel et en veille documentaire, "
+    "cultivé et précis. Extrais de l'article les personnes, organisations, lieux "
+    "et mots-clés les plus saillants, en préférant les termes normalisés et "
+    "significatifs. Réponds uniquement avec un objet JSON au format exact : "
     '{"entites": {"personnes": [], "organisations": [], "lieux": []}, "mot_cle": []}. '
     "Chaque entité est une courte chaîne en français."
 )

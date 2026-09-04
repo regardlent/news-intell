@@ -53,6 +53,8 @@ class Config:
 
     base_url: str = "http://localhost:8080"
     api_key: str = ""
+    backend: str = "localai"
+    modele_personnalise: dict[str, Any] = field(default_factory=dict)
     modele_embedding: str = "hal-qwen3-embedding-0.6b"
     modele_reranker: str = "jina-reranker-v1-base-en"
     timeout: float = 60.0
@@ -105,6 +107,8 @@ class Config:
                 "LOCALAI_BASE_URL", donnees.get("base_url", "http://localhost:8080")
             ),
             api_key=os.environ.get("LOCALAI_API_KEY", donnees.get("api_key", "")),
+            backend=donnees.get("backend", "localai"),
+            modele_personnalise=donnees.get("modele_personnalise", {}),
             modele_embedding=donnees.get(
                 "modele_embedding", "hal-qwen3-embedding-0.6b"
             ),

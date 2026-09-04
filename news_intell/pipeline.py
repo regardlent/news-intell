@@ -8,9 +8,9 @@ from __future__ import annotations
 from pathlib import Path
 
 from . import semantic
-from .client import LocalAIClient
 from .config import Config
 from .core.workers import ParcTravailleurs
+from .llm import creer_llm
 from .models import AnalyseArticle
 from .output import generer_rapport
 from .sources import rss
@@ -22,7 +22,7 @@ class Pipeline:
 
     def __init__(self, config: Config) -> None:
         self.config = config
-        self.client = LocalAIClient(config)
+        self.client = creer_llm(config)
         self.parc = ParcTravailleurs(self.client, config, config.nb_workers)
 
     def recuperer(self) -> list:

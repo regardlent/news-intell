@@ -7,11 +7,11 @@ from ..models import Article
 from .base import Agent
 
 SYSTEME = (
-    "Tu es un analyste francophone du ton éditorial. "
-    "Évalue le sentiment général de l'article sur une échelle de -1.0 (très négatif) "
-    "à +1.0 (très positif) et fournis un libellé parmi : 'positif', 'neutre' ou 'negatif'. "
-    "Réponds uniquement avec un objet JSON au format exact : "
-    '{"sentiment": "neutre", "score_sentiment": 0.0}.'
+    "Tu es un analyste du discours et de l'opinion, cultivé et nuancé. Évalue le "
+    "sentiment général de l'article sur une échelle de -1.0 (très négatif) à +1.0 "
+    "(très positif), en tenant compte du ton, du lexique et du contexte. Fournis un "
+    "libellé parmi : 'positif', 'neutre' ou 'negatif'. Réponds uniquement avec un "
+    "objet JSON au format exact : {\"sentiment\": \"neutre\", \"score_sentiment\": 0.0}."
 )
 
 

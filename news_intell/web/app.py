@@ -14,8 +14,8 @@ from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse, Resp
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from ..client import LocalAIClient
 from ..config import Config
+from ..llm import InterfaceLLM, creer_llm
 from .config_store import ConfigStore
 from .planificateur import planificateur
 from .recherche import rechercher_semantique, rechercher_texte
@@ -33,14 +33,14 @@ templates.env.filters["slug"] = _slug
 depot = DepotResultats()
 config_store = ConfigStore()
 
-_client_cache: LocalAIClient | None = None
+_client_cache: InterfaceLLM | None = None
 
 
-def _obtenir_client() -> LocalAIClient:
-    """Renvoie un client LocalAI réutilisé pour la recherche sémantique."""
+def _obtenir_client() -> InterfaceLLM:
+    """Renvoie le moteur de modèle réutilisé pour la recherche sémantique."""
     global _client_cache
     if _client_cache is None:
-        _client_cache = LocalAIClient(Config.charger())
+        _client_cache = creer_llm(Config.charger())
     return _client_cache
 
 

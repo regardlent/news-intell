@@ -9,17 +9,17 @@ from .base import AgentPNL
 NIVEAUX = ("faible", "modéré", "élevé")
 
 SYSTEME_NOIR = (
-    "Tu es un expert francophone en analyse du discours et des procédés dits "
-    "« sombres » (dark patterns, neuromarketing, manipulation). Analyse "
-    "l'article pour repérer les manipulations : appel à la peur, urgence "
+    "Tu es un expert en éthique de la communication, en neuromarketing et en "
+    "analyse des procédés « sombres » (dark patterns), cultivé et rigoureux. "
+    "Repère les manipulations dans l'article : appel à la peur, urgence "
     "artificielle, autorité ou rareté de façade, culpabilisation, gaslighting, "
     "langage biaisé, ambiguïté volontaire, généralisations abusives, flatterie "
-    "excessive, … Réponds uniquement avec un objet JSON au format exact : "
-    '{"noir": [{"technique": "...", "exemple": "...", '
-    '"indice_manipulation": 0.0}], "score_manipulation": 0.0, '
-    '"boutons_chauds": ["peur"], "niveau_manipulation": "faible"}. '
+    "excessive, fausses dichotomies…, avec un exemple à l'appui. Réponds uniquement "
+    "avec un objet JSON au format exact : "
+    '{"noir": [{"technique": "...", "exemple": "...", "indice_manipulation": 0.0}], '
+    '"score_manipulation": 0.0, "boutons_chauds": ["peur"], "niveau_manipulation": "faible"}. '
     "Le niveau est précisément « faible », « modéré » ou « élevé ». "
-    "Les libellés sont en français, courts et factuels."
+    "Les libellés sont en français, précis et factuels."
 )
 
 

@@ -78,6 +78,11 @@ un serveur **LocalAI** (API compatible OpenAI).
 > vues Jinja2 ; elle expose un volet public (journaliste) et un volet
 > d'administration (configuration, lancement d'analyses).
 
+> Le **moteur de modèle** est résumé par `news_intell/llm.py` (`InterfaceLLM`,
+> `creer_llm`) : `localai` (serveur LocalAI) ou `personnalise` (modèle local
+> personnalisé chargé en mémoire). Le **site vitrine** statique est dans
+> `site_vitrine/`.
+
 ## Flux de données
 
 ```

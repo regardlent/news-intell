@@ -12,6 +12,16 @@ base_url: "http://localhost:8080"
 # Clé d'API (facultatif si le serveur LocalAI n'exige pas d'auth).
 api_key: ""
 
+# Moteur de modèle :
+#   - "localai"      : serveur LocalAI (API compatible OpenAI).
+#   - "personnalise" : modèle local personnalisé chargé en mémoire (sans LocalAI).
+backend: "localai"
+
+# Si backend = "personnalise", indiquez votre modèle local (ex. GGUF) :
+modele_personnalise:
+  nom: "news-intell-expert"
+  chemin: "/chemin/vers/mon-modele.gguf"
+
 # Modèles utilisés (déjà chargés/nommés sur votre serveur).
 modele_embedding: "hal-qwen3-embedding-0.6b"
 modele_reranker: "jina-reranker-v1-base-en"

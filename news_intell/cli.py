@@ -13,8 +13,8 @@ import argparse
 import sys
 from pathlib import Path
 
-from .client import LocalAIClient
 from .config import Config
+from .llm import creer_llm
 from .output import generer_rapport
 from .pipeline import Pipeline
 from .storage import charger_articles, sauvegarder_articles, sauvegarder_resultats
@@ -63,8 +63,8 @@ def cmd_executer(args) -> int:
 
 
 def cmd_lister_modeles(_args) -> int:
-    """Liste les modèles disponibles sur le serveur LocalAI."""
-    client = LocalAIClient(_config())
+    """Liste les modèles disponibles sur le moteur configuré."""
+    client = creer_llm(_config())
     try:
         modeles = client.lister_modeles()
     except Exception as exc:  # noqa: BLE001

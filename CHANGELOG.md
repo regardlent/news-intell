@@ -31,6 +31,11 @@ de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
   User-Agent navigateur pour améliorer la récupération des flux.
 - Script `scripts/generer_exemple.py` pour générer rapidement un petit jeu
   d'articles analysés (alimente l'interface sans lancer l'analyse complète).
+- Agents rendus plus **cultivés et experts** (prompts enrichis).
+- Moteur de modèle **pluggable** : LocalAI ou **modèle local personnalisé**
+  (GGUF, sans API LocalAI) via `news_intell/llm.py`.
+- Ajout d'un **site vitrine** (`site_vitrine/`) et de la documentation de
+  l'équipe de développement (`docs/equipe_dev.md`).
 
 ### Prévu
 

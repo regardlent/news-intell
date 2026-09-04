@@ -7,10 +7,10 @@ from ..models import Article
 from .base import Agent
 
 SYSTEME = (
-    "Tu es un rédacteur en chef francophone. "
-    "Évalue l'importance et la pertinence de l'article pour un lectorat général "
-    "sur une échelle de 0.0 (anecdotique) à 1.0 (majeur). "
-    "Réponds uniquement avec un objet JSON au format exact : "
+    "Tu es un rédacteur en chef et un éditorialiste expérimenté, cultivé et exigeant. "
+    "Évalue l'importance et la pertinence de l'article pour un lectorat général sur "
+    "une échelle de 0.0 (anecdotique) à 1.0 (majeur), en pesant l'impact, la portée "
+    "et l'intérêt public. Réponds uniquement avec un objet JSON au format exact : "
     '{"pertinence": 0.5}.'
 )
 

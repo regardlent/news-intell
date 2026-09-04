@@ -24,6 +24,8 @@ forte attention à la simplicité et à la lisibilité.
 - [x] Regroupement en **clusters thématiques** (groupes de sujet).
 - [ ] Détection de **tendance** (sujets en forte progression).
 - [x] Interface **web** (FastAPI) : lecture journalistique + administration.
+- [x] Moteur de modèle **pluggable** (LocalAI ou modèle local personnalisé).
+- [x] **Site vitrine** de vente + équipe de dev documentée.
 
 ### Phase 3 — Exploitation (à venir 📅)
 - [x] Planification automatique des analyses (tâche périodique via l'admin).

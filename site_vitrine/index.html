@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>news-intell — La veille d'actualité par des agents IA</title>
+  <meta name="description" content="Collecte, analyse comportementale (PNL), recherche sémantique et rapports — le tout en français, sur vos propres modèles.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap">
+      <span class="logo">news-intell<span>.</span></span>
+      <nav>
+        <a href="#fonctionnalites">Fonctionnalités</a>
+        <a href="#fonctionnement">Comment ça marche</a>
+        <a href="#tarifs">Tarifs</a>
+        <a class="cta" href="#contact">Essayer</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <h1>L'actualité, analysée par des <span>agents IA experts</span></h1>
+      <p>Collecte, lecture comportementale (PNL), recherche sémantique et rapports — le tout en français, sur vos propres modèles.</p>
+      <div class="hero-actions">
+        <a class="bouton" href="#contact">Demander une démo</a>
+        <a class="bouton ghost" href="#fonctionnalites">Découvrir</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="fonctionnalites" class="section">
+    <div class="wrap">
+      <h2>Des agents cultivés et experts</h2>
+      <p class="sous-titre">Chaque article est analysé par une équipe d'agents spécialisés.</p>
+      <div class="grille">
+        <article><h3>Résumé éditorial</h3><p>Synthèse précise et nuancée, faits vérifiés et contexte.</p></article>
+        <article><h3>Thématique &amp; catégories</h3><p>Classification experte par domaine.</p></article>
+        <article><h3>Analyse comportementale (PNL)</h3><p>Techniques « neuro » et manipulations « sombres » détectées.</p></article>
+        <article><h3>Entités &amp; mots-clés</h3><p>Personnes, organisations, lieux, termes clés.</p></article>
+        <article><h3>Recherche sémantique</h3><p>Correspondance par pertinence (reranker + embeddings).</p></article>
+        <article><h3>Interface journalistique</h3><p>Accueil, recherche, fiches enrichies.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="fonctionnement" class="section sombre">
+    <div class="wrap">
+      <h2>Comment ça marche</h2>
+      <ol class="etapes">
+        <li><strong>Collecte</strong> — flux RSS francophones multi-sources.</li>
+        <li><strong>Analyse</strong> — agents IA experts + lecture PNL.</li>
+        <li><strong>Synthèse</strong> — note d'analyse et rapport.</li>
+        <li><strong>Diffusion</strong> — interface web, API JSON, export CSV.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="modeles" class="section">
+    <div class="wrap">
+      <h2>Vos modèles, vos données</h2>
+      <p>Fonctionne avec un serveur <strong>LocalAI</strong> ou un <strong>modèle local personnalisé</strong> chargé directement en mémoire — sans dépendre d'une API cloud.</p>
+    </div>
+  </section>
+
+  <section id="tarifs" class="section sombre">
+    <div class="wrap">
+      <h2>Tarifs</h2>
+      <div class="grille cartes">
+        <article><h3>Découverte</h3><p>Pour tester le pipeline.</p><p class="prix">Gratuit</p></article>
+        <article class="populaire"><h3>Pro</h3><p>Veille quotidienne et rapports.</p><p class="prix">Sur devis</p></article>
+        <article><h3>Enterprise</h3><p>Multi-utilisateurs, intégration.</p><p class="prix">Sur devis</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="wrap">
+      <h2>Essayer news-intell</h2>
+      <p>Contactez-nous pour une démonstration ou un déploiement.</p>
+      <form class="contact">
+        <input type="email" placeholder="votre@email.fr" required>
+        <button type="submit">Nous contacter</button>
+      </form>
+      <p id="confirmation" class="confirmation"></p>
+    </div>
+  </section>
+
+  <footer class="pied"><div class="wrap"><p>&copy; 2026 news-intell — Analyse intelligente de l'actualité.</p></div></footer>
+  <script src="app.js"></script>
+</body>
+</html>
