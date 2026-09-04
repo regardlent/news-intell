@@ -5,7 +5,7 @@
       "name": "news-intell : exécuter le pipeline",
       "type": "python",
       "request": "launch",
-      "module": "src.cli",
+      "module": "news_intell.cli",
       "args": ["executer", "--format", "md"],
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal"
@@ -14,7 +14,7 @@
       "name": "news-intell : lister les modèles",
       "type": "python",
       "request": "launch",
-      "module": "src.cli",
+      "module": "news_intell.cli",
       "args": ["lister-modeles"],
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal"

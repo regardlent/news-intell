@@ -13,7 +13,7 @@
 ## Comment tester
 
 <!-- Décrivez comment tester les modifications. -->
-<!-- Exemple : `py -3.12 -m src.cli executer --format md` -->
+<!-- Exemple : `py -3.12 -m news_intell.cli executer --format md` -->
 
 ## Conformité
 

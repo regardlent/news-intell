@@ -33,7 +33,7 @@ de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
   pertinence) orchestrés par un coordinateur.
 - Pipeline complet : récupération → analyse → stockage JSON → rapport.
 - Génération de rapports au format **Markdown**, **CSV** et **HTML**.
-- Interface en ligne de commande (`python -m src.cli`).
+- Interface en ligne de commande (`python -m news_intell.cli`).
 - Configuration centralisée (`config/config.yaml` + `.env`).
 - Tests unitaires et **CI GitHub Actions**.
 

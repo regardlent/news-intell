@@ -1,4 +1,4 @@
-"""Point d'entrée du projet : permet `python -m src`."""
+"""Point d'entrée du projet : permet `python -m news_intell`."""
 
 from .cli import main
 

@@ -11,15 +11,15 @@ import tempfile
 import unittest
 from pathlib import Path
 
-# Ajoute la racine du projet au PATH pour pouvoir importer le module « src ».
+# Ajoute la racine du projet au PATH pour pouvoir importer le module « news_intell ».
 RACINE = Path(__file__).resolve().parent.parent
 if str(RACINE) not in sys.path:
     sys.path.insert(0, str(RACINE))
 
-from src.agents.base import Agent
-from src.models import AnalyseArticle, Article
-from src.sources.rss import analyser_flux_xml
-from src.storage import sauvegarder_articles, sauvegarder_resultats
+from news_intell.agents.base import Agent
+from news_intell.models import AnalyseArticle, Article
+from news_intell.sources.rss import analyser_flux_xml
+from news_intell.storage import sauvegarder_articles, sauvegarder_resultats
 
 
 class TestExtraireJson(unittest.TestCase):

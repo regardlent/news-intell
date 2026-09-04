@@ -13,7 +13,7 @@ from typing import Any
 
 import yaml
 
-# Racine du projet (deux niveaux au-dessus de ce fichier : src/config.py).
+# Racine du projet (deux niveaux au-dessus de ce fichier : news_intell/config.py).
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 CONFIG_PATH = PROJECT_ROOT / "config" / "config.yaml"

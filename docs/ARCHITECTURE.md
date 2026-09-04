@@ -8,11 +8,11 @@ un serveur **LocalAI** (API compatible OpenAI).
 
 ```
                     ┌───────────────────────────────────────────┐
-                    │                  CLI (src/cli.py)         │
+                    │                  CLI (news_intell/cli.py)         │
                     └───────────────┬───────────────────────────┘
                                     │
                     ┌───────────────▼───────────────────────────┐
-                    │              Pipeline (src/pipeline.py)   │
+                    │              Pipeline (news_intell/pipeline.py)   │
                     │  recuperer ──► analyser ──► stockage ──► rapport │
                     └───────┬────────────────┬─────────────┬─────┘
                             │                │             │
@@ -35,29 +35,29 @@ un serveur **LocalAI** (API compatible OpenAI).
 
 ## Couches applicatives
 
-1. **Sources (`src/sources/rss.py`)** : téléchargement et analyse de flux
+1. **Sources (`news_intell/sources/rss.py`)** : téléchargement et analyse de flux
    RSS/Atom à l'aide de `requests` et de `xml.etree.ElementTree`. Produit des
    objets `Article`.
 
-2. **Client (`src/client.py`)** : client HTTP minimaliste vers l'API
+2. **Client (`news_intell/client.py`)** : client HTTP minimaliste vers l'API
    OpenAI-compatible de LocalAI (`/v1/chat/completions`, `/v1/embeddings`,
    `/v1/models`).
 
-3. **Agents (`src/agents/`)** : chaque agent est une classe héritant de
+3. **Agents (`news_intell/agents/`)** : chaque agent est une classe héritant de
    `Agent`, avec une mission propre (`resume`, `classification`, `sentiment`,
    `entites`, `pertinence`). Ils construisent des prompts **en français** et
    parseent une réponse JSON.
 
-4. **Coordinateur (`src/agents/coordinator.py`)** : exécute les agents en
+4. **Coordinateur (`news_intell/agents/coordinator.py`)** : exécute les agents en
    séquence sur un article et agrège le résultat dans `AnalyseArticle`.
 
-5. **Pipeline (`src/pipeline.py`)** : enchaîne la récupération, l'analyse et la
+5. **Pipeline (`news_intell/pipeline.py`)** : enchaîne la récupération, l'analyse et la
    production des fichiers de sortie.
 
-6. **Persistance (`src/storage.py`)** : lecture/écriture JSON
+6. **Persistance (`news_intell/storage.py`)** : lecture/écriture JSON
    (`data/articles.json`, `data/resultats.json`).
 
-7. **Rapports (`src/output.py`)** : conversion des analyses vers des rapports
+7. **Rapports (`news_intell/output.py`)** : conversion des analyses vers des rapports
    Markdown, CSV ou HTML.
 
 ## Flux de données

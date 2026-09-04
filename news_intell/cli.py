@@ -1,10 +1,10 @@
 """Interface en ligne de commande du projet news-intell.
 
 Usage :
-    python -m src.cli recuperer
-    python -m src.cli analyser --fichier data/articles.json
-    python -m src.cli executer --format md
-    python -m src.cli lister-modeles
+    python -m news_intell.cli recuperer
+    python -m news_intell.cli analyser --fichier data/articles.json
+    python -m news_intell.cli executer --format md
+    python -m news_intell.cli lister-modeles
 """
 from __future__ import annotations
 

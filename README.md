@@ -104,16 +104,16 @@ Depuis la racine du projet :
 
 ```bash
 # Lister les modèles disponibles sur LocalAI
-python -m src.cli lister-modeles
+python -m news_intell.cli lister-modeles
 
 # Récupérer les articles des sources
-python -m src.cli recuperer
+python -m news_intell.cli recuperer
 
 # Analyser les articles récupérés (génère data/resultats.json + rapport)
-python -m src.cli analyser --format md
+python -m news_intell.cli analyser --format md
 
 # Ou tout en une seule commande (collecte + analyse + rapport)
-python -m src.cli executer --format html
+python -m news_intell.cli executer --format html
 ```
 
 Formats de rapport disponibles : `md` (défaut), `csv`, `html`.
@@ -136,9 +136,9 @@ Formats de rapport disponibles : `md` (défaut), `csv`, `html`.
 | `entites`      | Personnes, organisations, lieux, mots-clés                   | `qwen3-1.7b`               |
 | `pertinence`   | Note d'importance (0..1)                                     | `granite-4.2-3b-flash`     |
 
-Chaque agent est une classe spécialisée de `src/agents/`, orchestrée par le
-[`CoordinateurAgents`](src/agents/coordinator.py). Leur logique est codée en
-français dans `src/agents/*.py`.
+Chaque agent est une classe spécialisée de `news_intell/agents/`, orchestrée par le
+[`CoordinateurAgents`](news_intell/agents/coordinator.py). Leur logique est codée en
+français dans `news_intell/agents/*.py`.
 
 ## 🗂️ Structure du projet
 
@@ -150,7 +150,7 @@ news-intell/
 ├── docs/
 │   └── ARCHITECTURE.md      # Architecture détaillée
 ├── scripts/                 # Scripts de lancement (Windows / Unix)
-├── src/
+├── news_intell/
 │   ├── cli.py               # Interface en ligne de commande
 │   ├── config.py            # Chargement de la configuration
 │   ├── client.py            # Client HTTP vers LocalAI

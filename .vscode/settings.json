@@ -1,6 +1,6 @@
 {
   "python.defaultInterpreterPath": "C:\\Users\\eiden\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
-  "python.analysis.extraPaths": ["src"],
+  "python.analysis.extraPaths": ["news_intell"],
   "files.encoding": "utf8",
   "python.testing.unittestEnabled": true,
   "python.testing.unittestArgs": ["discover", "-s", "tests"],

@@ -39,11 +39,11 @@ dev = [
 "Bugs" = "https://github.com/regardlent/news-intell/issues"
 
 [project.scripts]
-news-intell = "src.cli:main"
+news-intell = "news_intell.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["src", "src.*"]
+include = ["news_intell", "news_intell.*"]
 
 [tool.ruff]
 line-length = 100
