@@ -164,6 +164,9 @@ rigoureux et nuancé). Le **moteur de modèle** est **pluggable**
 **modèle local personnalisé** chargé en mémoire (`backend: "personnalise"` +
 `modele_personnalise.chemin`), sans dépendre de l'API LocalAI.
 
+Un **pipeline d'entraînement** (`scripts/entrainer_modele.py`) permet de
+« cultiver » votre propre modèle sur vos données ; voir [`docs/modele.md`](docs/modele.md).
+
 L'**analyse sémantique** complète le tout :
 
 - **Déduplication** (`news_intell/semantic.py`) : supprime les articles quasi
@@ -258,6 +261,7 @@ python -m news_intell.cli serveur --port 8000
 
 Un **site vitrine** de présentation/vente est fourni dans `site_vitrine/`
 (landing page statique). Voir `docs/equipe_dev.md` pour l'équipe de développement.
+Il peut être publié sur **GitHub Pages** (`.github/workflows/vitrine.yml`).
 
 Pour générer **rapidement** un petit jeu d'articles analysés (sans lancer
 l'analyse complète) :

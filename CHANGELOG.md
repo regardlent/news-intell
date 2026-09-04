@@ -36,6 +36,10 @@ de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
   (GGUF, sans API LocalAI) via `news_intell/llm.py`.
 - Ajout d'un **site vitrine** (`site_vitrine/`) et de la documentation de
   l'équipe de développement (`docs/equipe_dev.md`).
+- Pipeline d'entraînement d'un **modèle local personnalisé**
+  (`scripts/entrainer_modele.py`) + documentation `docs/modele.md`.
+- Déploiement du **site vitrine** sur GitHub Pages
+  (`.github/workflows/vitrine.yml`).
 
 ### Prévu
 

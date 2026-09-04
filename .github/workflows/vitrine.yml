@@ -1,0 +1,41 @@
+# Déploiement du site vitrine sur GitHub Pages.
+# Activez d'abord : Settings → Pages → Source = « GitHub Actions ».
+
+name: Déploiement du site vitrine
+
+on:
+  push:
+    branches: [main]
+    paths: ["site_vitrine/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Vérifier le dépôt
+        uses: actions/checkout@v4
+
+      - name: Configurer GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Publier le site vitrine
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site_vitrine
+
+      - name: Déployer
+        id: deployment
+        uses: actions/deploy-pages@v4
