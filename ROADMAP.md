@@ -20,8 +20,8 @@ forte attention à la simplicité et à la lisibilité.
 ### Phase 2 — Amélioration de l'analyse (en cours 🔄)
 - [x] Analyse comportementale : équipe **PNL** (« neuro » / « noir ») + **Analyste** (note écrite) + travailleurs.
 - [ ] Agent de **traduction** pour normaliser des articles multilingues.
-- [ ] **Déduplication sémantique** via embeddings + reranker.
-- [ ] Regroupement en **clusters thématiques** (cartes de sujet).
+- [x] **Déduplication sémantique** via embeddings (`hal-qwen3-embedding-0.6b`).
+- [x] Regroupement en **clusters thématiques** (groupes de sujet).
 - [ ] Détection de **tendance** (sujets en forte progression).
 - [ ] Export / **API web** légère pour interroger les résultats.
 

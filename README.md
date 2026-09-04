@@ -154,6 +154,17 @@ Le projet intègre aussi un **cœur** d'analyse comportementale :
 - **Travailleurs** (`news_intell/core/workers.py`) : enchaînent par article
   l'analyse de base, la PNL et la rédaction de la note.
 
+L'**analyse sémantique** complète le tout :
+
+- **Déduplication** (`news_intell/semantic.py`) : supprime les articles quasi
+  identiques (un même sujet relayé par plusieurs sources) grâce aux embeddings
+  LocalAI.
+- **Regroupement** : assigne un `groupe` (sujet) à chaque article et produit une
+  synthèse par sujet dans le rapport.
+
+Activez/désactivez ces étapes via `dedupe` et `clustering` dans
+`config/config.yaml`.
+
 ## 🗂️ Structure du projet
 
 ```
@@ -170,6 +181,7 @@ news-intell/
 │   ├── client.py            # Client HTTP vers LocalAI
 │   ├── models.py            # Modèles de données (Article, AnalyseArticle)
 │   ├── pipeline.py          # Pipeline haut niveau
+│   ├── semantic.py          # Déduplication + regroupement sémantique
 │   ├── storage.py           # Persistance JSON
 │   ├── output.py            # Génération des rapports (md/csv/html)
 │   ├── sources/rss.py       # Collecte des flux RSS/Atom

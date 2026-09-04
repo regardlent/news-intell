@@ -35,8 +35,23 @@ def generer_rapport(
     return chemin
 
 
+def _groupes_par_taille(resultats: list["AnalyseArticle"]) -> list[list["AnalyseArticle"]]:
+    """Regroupe les analyses par identifiant de groupe, triés du plus grand au plus petit."""
+    groupes: dict[int, list["AnalyseArticle"]] = {}
+    for r in resultats:
+        groupes.setdefault(r.groupe, []).append(r)
+    return sorted(groupes.values(), key=len, reverse=True)
+
+
 def _rapport_markdown(resultats: list["AnalyseArticle"], chemin: Path) -> None:
     lignes = ["# Rapport d'analyse de l'actualité\n"]
+    synthese = _groupes_par_taille(resultats)
+    if len(synthese) > 1:
+        lignes.append("## Synthèse par sujet (groupes sémantiques)\n")
+        for numero, membres in enumerate(synthese, start=1):
+            premier = membres[0].article.titre
+            lignes.append(f"- **Groupe {numero}** ({len(membres)} article(s)) : {premier}")
+        lignes.append("\n---\n")
     for r in _tri(resultats):
         lignes.append(f"## {r.article.titre}")
         lignes.append(f"- **Source** : {r.article.source}")
@@ -47,6 +62,8 @@ def _rapport_markdown(resultats: list["AnalyseArticle"], chemin: Path) -> None:
         lignes.append(f"- **Catégories** : {categories}")
         lignes.append(f"- **Sentiment** : {r.sentiment} ({r.score_sentiment:+.2f})")
         lignes.append(f"- **Pertinence** : {r.pertinence:.2f}")
+        if r.groupe:
+            lignes.append(f"- **Groupe** : {r.groupe}")
         if r.pnl is not None:
             lignes.append(
                 f"- **Manipulation (PNL)** : {r.pnl.score_manipulation:.2f} "
@@ -74,7 +91,7 @@ def _rapport_csv(resultats: list["AnalyseArticle"], chemin: Path) -> None:
     entetes = [
         "titre", "url", "source", "date_publication", "thematique", "sentiment",
         "score_sentiment", "pertinence", "resume_ia", "mot_cle",
-        "score_manipulation", "niveau_manipulation", "note_analyste",
+        "score_manipulation", "niveau_manipulation", "note_analyste", "groupe",
     ]
     with chemin.open("w", newline="", encoding="utf-8") as flux:
         ecrivain = csv.writer(flux, delimiter=";")
@@ -94,6 +111,7 @@ def _rapport_csv(resultats: list["AnalyseArticle"], chemin: Path) -> None:
                 f"{r.pnl.score_manipulation:.2f}" if r.pnl else "",
                 r.pnl.niveau_manipulation if r.pnl else "",
                 r.note_analyste,
+                r.groupe,
             ])
 
 
@@ -115,7 +133,8 @@ def _rapport_html(resultats: list["AnalyseArticle"], chemin: Path) -> None:
             f"<article><h2>{escape(r.article.titre)}</h2>"
             f"<p class='meta'>Source : <b>{escape(r.article.source)}</b> — "
             f"Thématique : <b>{escape(r.thematique)}</b> — "
-            f"Pertinence : <b>{r.pertinence:.2f}</b></p>"
+            f"Pertinence : <b>{r.pertinence:.2f}</b> — "
+            f"Groupe : <b>{r.groupe}</b></p>"
             f"<p>{resume}</p>"
             f"<p class='cats'>Catégories : {categories}&nbsp; Sentiment : "
             f"{escape(r.sentiment)} ({r.score_sentiment:+.2f})</p>"

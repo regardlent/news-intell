@@ -7,6 +7,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from . import semantic
 from .client import LocalAIClient
 from .config import Config
 from .core.workers import ParcTravailleurs
@@ -33,7 +34,15 @@ class Pipeline:
             limite = int(source.get("limite", 20))
             recups = rss.recuperer_flux(url, nom_source)[:limite]
             articles.extend(recups)
-        return self._dedupliquer(articles)
+        articles = self._dedupliquer(articles)
+        if self.config.dedupe_active:
+            try:
+                articles = semantic.dedupliciter(
+                    articles, self.client, self.config.dedupe_seuil
+                )
+            except Exception as exc:  # noqa: BLE001
+                print(f"⚠ Déduplication sémantique ignorée : {exc}")
+        return articles
 
     @staticmethod
     def _dedupliquer(articles: list) -> list:
@@ -50,6 +59,22 @@ class Pipeline:
         """Analyse les articles et agrège les résultats."""
         return self.parc.traiter_lot(articles)
 
+    def _applique_groupes(self, resultats: list[AnalyseArticle], articles: list) -> None:
+        """Assigné un identifiant de groupe (sujet sémantique) à chaque analyse."""
+        try:
+            groupes = semantic.groupes_ordonnes(
+                articles, self.client, self.config.clustering_seuil
+            )
+        except Exception as exc:  # noqa: BLE001
+            print(f"⚠ Regroupement sémantique ignoré : {exc}")
+            return
+        assignations: dict[int, int] = {}
+        for numero, membres in enumerate(groupes, start=1):
+            for article in membres:
+                assignations[id(article)] = numero
+        for resultat in resultats:
+            resultat.groupe = assignations.get(id(resultat.article), 0)
+
     def executer(
         self,
         chemin_articles: Path | None = None,
@@ -62,6 +87,8 @@ class Pipeline:
         sauvegarder_articles(articles, chemin_articles)
 
         resultats = self.analyser(articles)
+        if self.config.clustering_active:
+            self._applique_groupes(resultats, articles)
         chemin_resultats = chemin_resultats or Path("data") / "resultats.json"
         sauvegarder_resultats(resultats, chemin_resultats)
 

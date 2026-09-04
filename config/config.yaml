@@ -69,6 +69,19 @@ pnl:
 nb_workers: 1
 
 # -------------------------------------------------------------
+# Analyse sémantique : déduplication et regroupement d'articles.
+#   - dedupe.active : supprime les doublons sémantiques (embeddings).
+#   - clustering.active : regroupe les articles par sujet (sémantique).
+# -------------------------------------------------------------
+dedupe:
+  active: true
+  seuil: 0.9
+
+clustering:
+  active: true
+  seuil: 0.7
+
+# -------------------------------------------------------------
 # Sources d'actualité (flux RSS / Atom) à analyser.
 # Adaptez librement cette liste selon vos centres d'intérêt.
 # -------------------------------------------------------------

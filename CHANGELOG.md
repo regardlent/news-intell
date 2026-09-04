@@ -17,6 +17,8 @@ de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
   `ParcTravailleurs`).
 - Plafonnement de `max_tokens` pour maîtriser la durée de génération des modèles
   locaux.
+- Ajout de l'**analyse sémantique** : déduplication et regroupement d'articles
+  via les embeddings (`news_intell/semantic.py`).
 
 ### Prévu
 

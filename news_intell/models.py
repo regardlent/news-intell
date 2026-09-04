@@ -96,6 +96,7 @@ class AnalyseArticle:
     mot_cle: list[str] = field(default_factory=list)
     pnl: AnalysePNL | None = None
     note_analyste: str = ""
+    groupe: int = 0
     erreurs: list[str] = field(default_factory=list)
 
     def vers_dict(self) -> dict[str, Any]:
@@ -116,5 +117,6 @@ class AnalyseArticle:
             "mot_cle": self.mot_cle,
             "pnl": self.pnl.vers_dict() if self.pnl else None,
             "note_analyste": self.note_analyste,
+            "groupe": self.groupe,
             "erreurs": self.erreurs,
         }

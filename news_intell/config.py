@@ -62,6 +62,10 @@ class Config:
     seuils: dict[str, float] = field(default_factory=dict)
     pnl_active: bool = True
     nb_workers: int = 1
+    dedupe_active: bool = True
+    dedupe_seuil: float = 0.9
+    clustering_active: bool = True
+    clustering_seuil: float = 0.7
 
     @classmethod
     def charger(cls) -> "Config":
@@ -82,6 +86,20 @@ class Config:
         if isinstance(pnl_section, dict):
             pnl_active = bool(pnl_section.get("active", True))
 
+        dedupe = donnees.get("dedupe", {})
+        dedupe_active = True
+        dedupe_seuil = 0.9
+        if isinstance(dedupe, dict):
+            dedupe_active = bool(dedupe.get("active", True))
+            dedupe_seuil = float(dedupe.get("seuil", 0.9))
+
+        clustering = donnees.get("clustering", {})
+        clustering_active = True
+        clustering_seuil = 0.7
+        if isinstance(clustering, dict):
+            clustering_active = bool(clustering.get("active", True))
+            clustering_seuil = float(clustering.get("seuil", 0.7))
+
         return cls(
             base_url=os.environ.get(
                 "LOCALAI_BASE_URL", donnees.get("base_url", "http://localhost:8080")
@@ -98,4 +116,8 @@ class Config:
             seuils=donnees.get("seuils", {}),
             pnl_active=pnl_active,
             nb_workers=int(donnees.get("nb_workers", 1)),
+            dedupe_active=dedupe_active,
+            dedupe_seuil=dedupe_seuil,
+            clustering_active=clustering_active,
+            clustering_seuil=clustering_seuil,
         )

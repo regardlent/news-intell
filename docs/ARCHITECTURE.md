@@ -70,6 +70,10 @@ un serveur **LocalAI** (API compatible OpenAI).
 9. **Rapports (`news_intell/output.py`)** : conversion des analyses (y compris la
    lecture PNL et la note) vers des rapports Markdown, CSV ou HTML.
 
+> Le pipeline applique aussi l'**analyse sémantique** (`news_intell/semantic.py`) :
+> déduplication (suppression des doublons) et regroupement (assignation d'un
+> `groupe`) à l'aide des embeddings de LocalAI (`hal-qwen3-embedding-0.6b`).
+
 ## Flux de données
 
 ```
