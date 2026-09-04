@@ -5,6 +5,7 @@
   <h1>Recherche</h1>
   <form class="recherche" action="/recherche" method="get">
     <input type="search" name="q" value="{{ q }}" placeholder="Rechercher un sujet, une source…">
+    <label class="case"><input type="checkbox" name="mode" value="semantique" {% if mode == 'semantique' %}checked{% endif %}> Recherche sémantique</label>
     <button type="submit">Rechercher</button>
   </form>
 </section>

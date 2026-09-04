@@ -250,6 +250,10 @@ python -m news_intell.cli serveur --port 8000
 > Le panneau admin permet de déclencher une analyse et de modifier la
 > configuration (`config/config.yaml`) directement depuis le navigateur.
 
+La **recherche** propose un mode **sémantique** (reranker LocalAI avec repli sur
+les embeddings). Une **API JSON** est aussi disponible :
+`/api/articles`, `/api/recherche`, `/api/article/{cle}`.
+
 ## 📦 Publication de releases
 
 Lancez une publication en créant un tag versionné à partir de `main` :

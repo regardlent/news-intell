@@ -12,8 +12,10 @@ from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
+from ..client import LocalAIClient
 from ..config import Config
 from .config_store import ConfigStore
+from .recherche import rechercher_semantique, rechercher_texte
 from .repository import DepotResultats, _slug
 from .taches import taches
 
@@ -27,23 +29,15 @@ templates.env.filters["slug"] = _slug
 depot = DepotResultats()
 config_store = ConfigStore()
 
+_client_cache: LocalAIClient | None = None
 
-def _filtrer(resultats: list, q: str) -> list:
-    """Filtre simple (texte) : titre, thématique, source, mots-clés."""
-    qn = q.strip().lower()
-    if not qn:
-        return resultats
 
-    def correspond(r: dict) -> bool:
-        champs = [
-            r.get("titre", ""),
-            r.get("thematique", ""),
-            r.get("source", ""),
-            " ".join(r.get("mot_cle", [])),
-        ]
-        return any(qn in champ.lower() for champ in champs)
-
-    return [r for r in resultats if correspond(r)]
+def _obtenir_client() -> LocalAIClient:
+    """Renvoie un client LocalAI réutilisé pour la recherche sémantique."""
+    global _client_cache
+    if _client_cache is None:
+        _client_cache = LocalAIClient(Config.charger())
+    return _client_cache
 
 
 def _lancer_analyse() -> str:
@@ -86,13 +80,38 @@ def creer_app() -> FastAPI:
         )
 
     @app.get("/recherche", response_class=HTMLResponse)
-    def recherche(request: Request, q: str = ""):
-        resultats = _filtrer(depot.lister(), q)
+    def recherche(request: Request, q: str = "", mode: str = "texte"):
+        resultats = depot.lister()
+        if mode == "semantique" and q:
+            resultats = rechercher_semantique(resultats, q, _obtenir_client())
+        else:
+            resultats = rechercher_texte(resultats, q)
         return templates.TemplateResponse(
             request,
             "public/recherche.html",
-            {"q": q, "articles": resultats},
+            {"q": q, "mode": mode, "articles": resultats},
         )
+
+    # --- API JSON ---
+    @app.get("/api/articles")
+    def api_articles():
+        return JSONResponse(depot.lister())
+
+    @app.get("/api/recherche")
+    def api_recherche(q: str = "", mode: str = "texte"):
+        resultats = depot.lister()
+        if mode == "semantique" and q:
+            resultats = rechercher_semantique(resultats, q, _obtenir_client(), top_n=20)
+        else:
+            resultats = rechercher_texte(resultats, q)
+        return JSONResponse(resultats)
+
+    @app.get("/api/article/{cle}")
+    def api_article(cle: str):
+        donnees = depot.get_par_cle(cle)
+        if donnees is None:
+            return JSONResponse({"erreur": "introuvable"}, status_code=404)
+        return JSONResponse(donnees)
 
     # --- Administration ---
     @app.get("/admin", response_class=HTMLResponse)

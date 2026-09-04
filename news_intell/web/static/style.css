@@ -19,6 +19,7 @@ a:hover{text-decoration:underline}
 .recherche{display:flex;gap:.5rem;margin-top:1rem}
 .recherche input{flex:1;padding:.6rem;border:1px solid var(--bord);font-family:inherit}
 .recherche button{padding:.6rem 1.2rem;background:var(--accent);color:#fff;border:0;cursor:pointer}
+.case{display:inline-flex;align-items:center;gap:.35rem;color:var(--ton);font-size:.95rem}
 .a-la-une{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
 .carte,.sujet{background:var(--carte);border:1px solid var(--bord);padding:1rem}
 .carte h2{font-size:1.2rem;margin:.4rem 0}
