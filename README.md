@@ -98,6 +98,9 @@ Les réglages principaux se trouvent dans [`config/config.yaml`](config/config.y
 - `sources` : liste des flux RSS à analyser ;
 - `seuils` : seuils de sélection/pondération.
 
+> ⏱️ La génération sur des modèles locaux peut être lente ; ajustez `timeout`
+> (en secondes) dans `config/config.yaml` si nécessaire.
+
 ## 🚀 Utilisation
 
 Depuis la racine du projet :
@@ -140,6 +143,17 @@ Chaque agent est une classe spécialisée de `news_intell/agents/`, orchestrée 
 [`CoordinateurAgents`](news_intell/agents/coordinator.py). Leur logique est codée en
 français dans `news_intell/agents/*.py`.
 
+Le projet intègre aussi un **cœur** d'analyse comportementale :
+
+- **Équipe PNL** (`news_intell/agents/pnl/`) : deux agents — PNL « neuro »
+  (techniques d'influence constructives) et PNL « noir » (détection des
+  manipulations / dark patterns) — produisant une lecture comportementale.
+- **Analyste** (`news_intell/core/analyst.py`) : rédige la **note d'analyse**
+  (par écrit, en français) qui synthétise l'article, son traitement éditorial
+  et sa lecture comportementale.
+- **Travailleurs** (`news_intell/core/workers.py`) : enchaînent par article
+  l'analyse de base, la PNL et la rédaction de la note.
+
 ## 🗂️ Structure du projet
 
 ```
@@ -159,7 +173,9 @@ news-intell/
 │   ├── storage.py           # Persistance JSON
 │   ├── output.py            # Génération des rapports (md/csv/html)
 │   ├── sources/rss.py       # Collecte des flux RSS/Atom
-│   └── agents/              # Agents IA + coordinateur
+│   ├── agents/              # Agents IA + coordinateur
+│   ├── agents/pnl/          # Agents PNL (neuro / noir)
+│   └── core/                # Analyste + travailleurs
 ├── tests/                   # Tests unitaires
 ├── .github/
 │   ├── ISSUE_TEMPLATE/      # Modèles d'issues (bug, fonctionnalité)

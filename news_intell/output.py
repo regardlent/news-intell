@@ -47,6 +47,13 @@ def _rapport_markdown(resultats: list["AnalyseArticle"], chemin: Path) -> None:
         lignes.append(f"- **Catégories** : {categories}")
         lignes.append(f"- **Sentiment** : {r.sentiment} ({r.score_sentiment:+.2f})")
         lignes.append(f"- **Pertinence** : {r.pertinence:.2f}")
+        if r.pnl is not None:
+            lignes.append(
+                f"- **Manipulation (PNL)** : {r.pnl.score_manipulation:.2f} "
+                f"({r.pnl.niveau_manipulation})"
+            )
+            boutons = ", ".join(r.pnl.boutons_chauds) if r.pnl.boutons_chauds else "aucun"
+            lignes.append(f"- **Déclencheurs émotionnels** : {boutons}")
         if r.resume_ia:
             lignes.append(f"\n**Résumé** : {r.resume_ia}\n")
         if r.mot_cle:
@@ -57,6 +64,8 @@ def _rapport_markdown(resultats: list["AnalyseArticle"], chemin: Path) -> None:
         lignes.append(f"**Personnes** : {personnes}")
         lignes.append(f"**Organisations** : {organisations}")
         lignes.append(f"**Lieux** : {lieux}")
+        if r.note_analyste:
+            lignes.append(f"\n**Note d'analyse** : {r.note_analyste}\n")
         lignes.append("\n---\n")
     chemin.write_text("\n".join(lignes), encoding="utf-8")
 
@@ -65,6 +74,7 @@ def _rapport_csv(resultats: list["AnalyseArticle"], chemin: Path) -> None:
     entetes = [
         "titre", "url", "source", "date_publication", "thematique", "sentiment",
         "score_sentiment", "pertinence", "resume_ia", "mot_cle",
+        "score_manipulation", "niveau_manipulation", "note_analyste",
     ]
     with chemin.open("w", newline="", encoding="utf-8") as flux:
         ecrivain = csv.writer(flux, delimiter=";")
@@ -81,6 +91,9 @@ def _rapport_csv(resultats: list["AnalyseArticle"], chemin: Path) -> None:
                 r.pertinence,
                 r.resume_ia,
                 "|".join(r.mot_cle),
+                f"{r.pnl.score_manipulation:.2f}" if r.pnl else "",
+                r.pnl.niveau_manipulation if r.pnl else "",
+                r.note_analyste,
             ])
 
 
@@ -89,6 +102,15 @@ def _rapport_html(resultats: list["AnalyseArticle"], chemin: Path) -> None:
     for r in _tri(resultats):
         categories = ", ".join(escape(c) for c in r.categories) if r.categories else "n/a"
         resume = escape(r.resume_ia) if r.resume_ia else ""
+        pnl_html = ""
+        if r.pnl is not None:
+            boutons = ", ".join(escape(b) for b in r.pnl.boutons_chauds) or "aucun"
+            pnl_html = (
+                f"<p class='cats'>Analyse PNL : "
+                f"{r.pnl.score_manipulation:.2f} ({escape(r.pnl.niveau_manipulation)}) "
+                f"&nbsp; Déclencheurs : {boutons}</p>"
+            )
+        note_html = f"<p class='note'>{escape(r.note_analyste)}</p>" if r.note_analyste else ""
         cartes.append(
             f"<article><h2>{escape(r.article.titre)}</h2>"
             f"<p class='meta'>Source : <b>{escape(r.article.source)}</b> — "
@@ -97,6 +119,7 @@ def _rapport_html(resultats: list["AnalyseArticle"], chemin: Path) -> None:
             f"<p>{resume}</p>"
             f"<p class='cats'>Catégories : {categories}&nbsp; Sentiment : "
             f"{escape(r.sentiment)} ({r.score_sentiment:+.2f})</p>"
+            f"{pnl_html}{note_html}"
             f"</article>"
         )
     html = (

@@ -12,6 +12,11 @@ de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 - Ajout de **Ruff** pour la vérification du style de code (étape de CI).
 - Workflow de publication de releases GitHub (`.github/workflows/publish.yml`).
 - Fichier `.editorconfig` pour des règles d'édition cohérentes.
+- Ajout du **cœur** du projet : agents **PNL** (analyse comportementale « neuro »
+  et « noir »), **Analyste** (note écrite) et **travailleurs** (`Travailleur`,
+  `ParcTravailleurs`).
+- Plafonnement de `max_tokens` pour maîtriser la durée de génération des modèles
+  locaux.
 
 ### Prévu
 

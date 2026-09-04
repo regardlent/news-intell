@@ -32,6 +32,7 @@ class LocalAIClient:
         modele: str,
         messages: list[dict[str, str]],
         temperature: float | None = None,
+        max_tokens: int | None = None,
     ) -> str:
         """Envoie un dialogue de chat et renvoie la réponse textuelle du modèle."""
         payload: dict[str, Any] = {
@@ -39,6 +40,8 @@ class LocalAIClient:
             "messages": messages,
             "temperature": temperature if temperature is not None else 0.2,
         }
+        if max_tokens is not None:
+            payload["max_tokens"] = max_tokens
         try:
             reponse = self._session.post(
                 f"{self._base}/v1/chat/completions",

@@ -18,6 +18,7 @@ forte attention à la simplicité et à la lisibilité.
 - CLI, configuration, tests et CI.
 
 ### Phase 2 — Amélioration de l'analyse (en cours 🔄)
+- [x] Analyse comportementale : équipe **PNL** (« neuro » / « noir ») + **Analyste** (note écrite) + travailleurs.
 - [ ] Agent de **traduction** pour normaliser des articles multilingues.
 - [ ] **Déduplication sémantique** via embeddings + reranker.
 - [ ] Regroupement en **clusters thématiques** (cartes de sujet).

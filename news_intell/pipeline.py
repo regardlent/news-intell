@@ -7,9 +7,9 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from .agents.coordinator import CoordinateurAgents
 from .client import LocalAIClient
 from .config import Config
+from .core.workers import ParcTravailleurs
 from .models import AnalyseArticle
 from .output import generer_rapport
 from .sources import rss
@@ -22,7 +22,7 @@ class Pipeline:
     def __init__(self, config: Config) -> None:
         self.config = config
         self.client = LocalAIClient(config)
-        self.coordinateur = CoordinateurAgents(self.client, config)
+        self.parc = ParcTravailleurs(self.client, config, config.nb_workers)
 
     def recuperer(self) -> list:
         """Récupère les articles depuis toutes les sources configurées."""
@@ -48,7 +48,7 @@ class Pipeline:
 
     def analyser(self, articles: list) -> list[AnalyseArticle]:
         """Analyse les articles et agrège les résultats."""
-        return self.coordinateur.analyser_lot(articles)
+        return self.parc.traiter_lot(articles)
 
     def executer(
         self,

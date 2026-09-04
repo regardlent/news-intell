@@ -5,5 +5,6 @@ entités, pertinence) en interrogeant un modèle LocalAI. Le coordinateur
 orchestre l'ensemble.
 """
 from .coordinator import CoordinateurAgents
+from .pnl import EquipePNL
 
-__all__ = ["CoordinateurAgents"]
+__all__ = ["CoordinateurAgents", "EquipePNL"]

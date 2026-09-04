@@ -41,7 +41,7 @@ un serveur **LocalAI** (API compatible OpenAI).
 
 2. **Client (`news_intell/client.py`)** : client HTTP minimaliste vers l'API
    OpenAI-compatible de LocalAI (`/v1/chat/completions`, `/v1/embeddings`,
-   `/v1/models`).
+   `/v1/models`), avec plafonnement de `max_tokens`.
 
 3. **Agents (`news_intell/agents/`)** : chaque agent est une classe héritant de
    `Agent`, avec une mission propre (`resume`, `classification`, `sentiment`,
@@ -51,14 +51,24 @@ un serveur **LocalAI** (API compatible OpenAI).
 4. **Coordinateur (`news_intell/agents/coordinator.py`)** : exécute les agents en
    séquence sur un article et agrège le résultat dans `AnalyseArticle`.
 
-5. **Pipeline (`news_intell/pipeline.py`)** : enchaîne la récupération, l'analyse et la
-   production des fichiers de sortie.
+5. **Équipe PNL (`news_intell/agents/pnl/`)** : analyse comportementale du discours.
+   Deux agents spécialisés — PNL « neuro » (communication constructive) et PNL
+   « noir » (détection des manipulations / dark patterns) — agrégés par
+   `EquipePNL` en une `AnalysePNL` (score de manipulation, boutons chauds…).
 
-6. **Persistance (`news_intell/storage.py`)** : lecture/écriture JSON
+6. **Cœur (`news_intell/core/`)** : l'**Analyste** rédige la note d'analyse
+   comportementale (par écrit, en français) ; les **Travailleurs**
+   (`Travailleur`, `ParcTravailleurs`) enchaînent par article : analyse de base →
+   PNL → rédaction de la note.
+
+7. **Pipeline (`news_intell/pipeline.py`)** : enchaîne la récupération, l'analyse
+   (via `ParcTravailleurs`) et la production des fichiers de sortie.
+
+8. **Persistance (`news_intell/storage.py`)** : lecture/écriture JSON
    (`data/articles.json`, `data/resultats.json`).
 
-7. **Rapports (`news_intell/output.py`)** : conversion des analyses vers des rapports
-   Markdown, CSV ou HTML.
+9. **Rapports (`news_intell/output.py`)** : conversion des analyses (y compris la
+   lecture PNL et la note) vers des rapports Markdown, CSV ou HTML.
 
 ## Flux de données
 
@@ -66,8 +76,8 @@ un serveur **LocalAI** (API compatible OpenAI).
 Flux RSS ──► list[Article]
                  │
                  ▼
-      CoordinateurAgents.analyser_lot(articles)
-                 │  (pour chaque article, exécute les agents)
+      ParcTravailleurs.traiter_lot(articles)
+                 │  (pour chaque article : CoordinateurAgents → EquipePNL → Analyste)
                  ▼
            list[AnalyseArticle]
                  │
@@ -84,6 +94,8 @@ Flux RSS ──► list[Article]
   `AnalyseArticle.erreurs` sans interrompre le reste de la chaîne.
 - La collecte RSS tolère les flux indisponibles (retourne une liste vide).
 - La réponse JSON d'un agent est parseée de façon tolérante (`Agent.extraire_json`).
+- Les agents PNL sont isolés : une erreur est enregistrée dans `AnalysePNL.erreurs`
+  sans bloquer l'analyse ; de même pour l'analyste (`AnalyseArticle.erreurs`).
 
 ## Extension possible
 

@@ -17,7 +17,9 @@ modele_embedding: "hal-qwen3-embedding-0.6b"
 modele_reranker: "jina-reranker-v1-base-en"
 
 # Délai d'attente (en secondes) pour chaque appel au serveur.
-timeout: 60
+# La génération de texte sur des modèles locaux peut être lente : augmentez
+# cette valeur si nécessaire (voir le README).
+timeout: 300
 
 # Langue de travail (toutes les sorties sont produites dans cette langue).
 langue: "fr"
@@ -46,6 +48,25 @@ agents:
   pertinence:
     modele: "granite-4.2-3b-flash"
     temperature: 0.0
+  pnl_neuro:
+    modele: "granite-4.2-3b-flash"
+    temperature: 0.1
+  pnl_noir:
+    modele: "granite-4.2-3b-flash"
+    temperature: 0.0
+  analyste:
+    modele: "granite-4.2-3b-flash"
+    temperature: 0.3
+
+# -------------------------------------------------------------
+# Analyse comportementale (agents PNL neuro / noir) et travailleurs.
+#   - pnl.active : active ou non l'analyse comportementale (PNL).
+#   - nb_workers : nombre de travailleurs pour traiter les articles.
+# -------------------------------------------------------------
+pnl:
+  active: true
+
+nb_workers: 1
 
 # -------------------------------------------------------------
 # Sources d'actualité (flux RSS / Atom) à analyser.

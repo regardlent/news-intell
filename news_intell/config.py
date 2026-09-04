@@ -60,6 +60,8 @@ class Config:
     agents: dict[str, AgentConfig] = field(default_factory=dict)
     sources: list[dict[str, Any]] = field(default_factory=list)
     seuils: dict[str, float] = field(default_factory=dict)
+    pnl_active: bool = True
+    nb_workers: int = 1
 
     @classmethod
     def charger(cls) -> "Config":
@@ -75,6 +77,11 @@ class Config:
             for nom, v in (donnees.get("agents") or {}).items()
         }
 
+        pnl_section = donnees.get("pnl", {})
+        pnl_active = True
+        if isinstance(pnl_section, dict):
+            pnl_active = bool(pnl_section.get("active", True))
+
         return cls(
             base_url=os.environ.get(
                 "LOCALAI_BASE_URL", donnees.get("base_url", "http://localhost:8080")
@@ -89,4 +96,6 @@ class Config:
             agents=agents,
             sources=donnees.get("sources", []),
             seuils=donnees.get("seuils", {}),
+            pnl_active=pnl_active,
+            nb_workers=int(donnees.get("nb_workers", 1)),
         )

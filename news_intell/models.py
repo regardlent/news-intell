@@ -47,6 +47,41 @@ class Article:
 
 
 @dataclass
+class AnalysePNL:
+    """Analyse comportementale (PNL) d'un article.
+
+    Attributes:
+        neuro: techniques de communication constructives (PNL « neuro »).
+        noir: techniques de manipulation détectées (PNL « noir »).
+        score_manipulation: niveau global (0..1).
+        niveau_manipulation: libellé (« faible », « modéré », « élevé »).
+        boutons_chauds: déclencheurs émotionnels identifiés.
+        remarques: commentaire libre de l'agent.
+        erreurs: erreurs éventuelles des agents PNL.
+    """
+
+    neuro: list[dict[str, Any]] = field(default_factory=list)
+    noir: list[dict[str, Any]] = field(default_factory=list)
+    score_manipulation: float = 0.0
+    niveau_manipulation: str = "faible"
+    boutons_chauds: list[str] = field(default_factory=list)
+    remarques: str = ""
+    erreurs: list[str] = field(default_factory=list)
+
+    def vers_dict(self) -> dict[str, Any]:
+        """Sérialise l'analyse PNL en dictionnaire."""
+        return {
+            "neuro": self.neuro,
+            "noir": self.noir,
+            "score_manipulation": self.score_manipulation,
+            "niveau_manipulation": self.niveau_manipulation,
+            "boutons_chauds": self.boutons_chauds,
+            "remarques": self.remarques,
+            "erreurs": self.erreurs,
+        }
+
+
+@dataclass
 class AnalyseArticle:
     """Résultat de l'analyse d'un article par les agents IA."""
 
@@ -59,6 +94,8 @@ class AnalyseArticle:
     entites: dict[str, list[str]] = field(default_factory=dict)  # {type: [valeurs]}
     pertinence: float = 0.0
     mot_cle: list[str] = field(default_factory=list)
+    pnl: AnalysePNL | None = None
+    note_analyste: str = ""
     erreurs: list[str] = field(default_factory=list)
 
     def vers_dict(self) -> dict[str, Any]:
@@ -77,5 +114,7 @@ class AnalyseArticle:
             "entites": self.entites,
             "pertinence": self.pertinence,
             "mot_cle": self.mot_cle,
+            "pnl": self.pnl.vers_dict() if self.pnl else None,
+            "note_analyste": self.note_analyste,
             "erreurs": self.erreurs,
         }

@@ -22,3 +22,10 @@ modifiables sans toucher au code.
 | Sentiment        | `news_intell/agents/sentiment.py`              | Ton (positif, neutre, négatif) + score (-1..1) |
 | Entités          | `news_intell/agents/entities.py`               | Personnes, organisations, lieux, mots-clés     |
 | Pertinence       | `news_intell/agents/relevance.py`              | Note d'importance (0..1)                       |
+| PNL « neuro »    | `news_intell/agents/pnl/neuro.py`              | Techniques d'influence constructives           |
+| PNL « noir »     | `news_intell/agents/pnl/noir.py`               | Détection des procédés manipulateurs           |
+| Analyste (note)  | `news_intell/core/analyst.py`                  | Rédaction de la note comportementale           |
+
+Les prompts du système PNL (`SYSTEME_NEURO`, `SYSTEME_NOIR`) figurent dans
+`news_intell/agents/pnl/` et celui de l'analyste (`SYSTEME_NOTE`) dans
+`news_intell/core/analyst.py`.

@@ -26,6 +26,7 @@ class Agent(ABC):
 
     nom: str = "agent"
     role: str = "Agent IA générique"
+    max_tokens: int | None = 400
 
     def __init__(self, client: LocalAIClient, config: Config) -> None:
         self.client = client
@@ -54,7 +55,12 @@ class Agent(ABC):
             {"role": "system", "content": systeme},
             {"role": "user", "content": utilisateur},
         ]
-        return self.client.chat(self.modele, messages, temperature=self.temperature)
+        return self.client.chat(
+            self.modele,
+            messages,
+            temperature=self.temperature,
+            max_tokens=self.max_tokens,
+        )
 
     def json_strict(self, systeme: str, utilisateur: str) -> dict[str, Any]:
         """Demande au modèle une réponse JSON valide et la parse."""
