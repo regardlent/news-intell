@@ -23,7 +23,7 @@ forte attention à la simplicité et à la lisibilité.
 - [x] **Déduplication sémantique** via embeddings (`hal-qwen3-embedding-0.6b`).
 - [x] Regroupement en **clusters thématiques** (groupes de sujet).
 - [ ] Détection de **tendance** (sujets en forte progression).
-- [ ] Export / **API web** légère pour interroger les résultats.
+- [x] Interface **web** (FastAPI) : lecture journalistique + administration.
 
 ### Phase 3 — Exploitation (à venir 📅)
 - [ ] Planification automatique des analyses (cron / tâche planifiée).

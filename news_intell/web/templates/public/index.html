@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block titre %}Accueil — news-intell{% endblock %}
+{% block contenu %}
+<section class="hero">
+  <h1>L'actualité, décryptée par des agents IA</h1>
+  <p>Un regard journalistique : thèmes, sentiments, entités et lecture comportementale (PNL) pour chaque article.</p>
+  <form class="recherche" action="/recherche" method="get">
+    <input type="search" name="q" placeholder="Rechercher un sujet, une source…">
+    <button type="submit">Rechercher</button>
+  </form>
+</section>
+
+{% set a_la_une = articles[:3] %}
+{% if a_la_une %}
+<section class="a-la-une">
+  {% for a in a_la_une %}
+  <article class="carte">
+    <span class="etiquette">{{ a.thematique or 'Divers' }}</span>
+    <h2><a href="/article/{{ a.titre | slug }}">{{ a.titre }}</a></h2>
+    <p class="meta">{{ a.source }} · Pertinence {{ '%.2f'|format(a.pertinence) }}</p>
+    <p class="apercu">{{ a.resume_ia or a.resume }}</p>
+  </article>
+  {% endfor %}
+</section>
+{% endif %}
+
+{% if groupes %}
+<h2 class="section-titre">Par sujet</h2>
+{% for numero, membres in groupes.items() if numero %}
+<section class="sujet">
+  <h3>Sujet {{ numero }} ({{ membres|length }} article(s))</h3>
+  <ul>
+    {% for a in membres %}
+    <li><a href="/article/{{ a.titre | slug }}">{{ a.titre }}</a> <span class="source">— {{ a.source }}</span></li>
+    {% endfor %}
+  </ul>
+</section>
+{% endfor %}
+{% endif %}
+
+{% if not articles %}
+<div class="vide">
+  <p>Aucune analyse enregistrée.</p>
+  <p>Lancez une analyse depuis l'<a href="/admin">administration</a> ou via la CLI : <code>news-intell executer</code>.</p>
+</div>
+{% endif %}
+{% endblock %}

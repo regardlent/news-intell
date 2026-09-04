@@ -74,6 +74,10 @@ un serveur **LocalAI** (API compatible OpenAI).
 > déduplication (suppression des doublons) et regroupement (assignation d'un
 > `groupe`) à l'aide des embeddings de LocalAI (`hal-qwen3-embedding-0.6b`).
 
+> L'**interface web** est servie par FastAPI (`news_intell/web/app.py`) avec des
+> vues Jinja2 ; elle expose un volet public (journaliste) et un volet
+> d'administration (configuration, lancement d'analyses).
+
 ## Flux de données
 
 ```

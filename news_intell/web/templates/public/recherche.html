@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block titre %}Recherche — news-intell{% endblock %}
+{% block contenu %}
+<section class="hero hero-court">
+  <h1>Recherche</h1>
+  <form class="recherche" action="/recherche" method="get">
+    <input type="search" name="q" value="{{ q }}" placeholder="Rechercher un sujet, une source…">
+    <button type="submit">Rechercher</button>
+  </form>
+</section>
+
+{% if articles %}
+<ul class="resultats">
+  {% for a in articles %}
+  <li><a href="/article/{{ a.titre | slug }}">{{ a.titre }}</a> <span class="source">— {{ a.source }} · {{ a.thematique }}</span></li>
+  {% endfor %}
+</ul>
+{% else %}
+<div class="vide"><p>Aucun résultat pour « {{ q }} ».</p></div>
+{% endif %}
+{% endblock %}

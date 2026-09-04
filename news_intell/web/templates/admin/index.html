@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block titre %}Administration — news-intell{% endblock %}
+{% block contenu %}
+<h1>Administration</h1>
+<section class="admin-stats">
+  <div class="stat"><strong>{{ nb_articles }}</strong><span>articles analysés</span></div>
+  <div class="stat"><strong>{{ nb_sources }}</strong><span>sources configurées</span></div>
+</section>
+
+<section class="admin-actions">
+  <h2>Actions rapides</h2>
+  <button id="btn-analyser">Lancer une analyse</button>
+  <a class="bouton" href="/admin/config">Configurer le projet</a>
+  <a class="bouton" href="/admin/actualiser">Actualiser</a>
+</section>
+
+<section class="admin-sources">
+  <h2>Sources</h2>
+  <table>
+    <tr><th>Nom</th><th>URL</th><th>Limite</th></tr>
+    {% for s in sources %}
+    <tr><td>{{ s.nom }}</td><td>{{ s.url }}</td><td>{{ s.limite }}</td></tr>
+    {% endfor %}
+  </table>
+</section>
+
+<section class="admin-taches">
+  <h2>Tâches</h2>
+  <p id="statut-tache">Aucune tâche en cours.</p>
+</section>
+{% endblock %}

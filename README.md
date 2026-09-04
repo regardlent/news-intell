@@ -117,6 +117,10 @@ python -m news_intell.cli analyser --format md
 
 # Ou tout en une seule commande (collecte + analyse + rapport)
 python -m news_intell.cli executer --format html
+
+# Lancer le serveur web (interface journalistique + administration)
+python -m news_intell.cli serveur --hote 127.0.0.1 --port 8000
+# Puis ouvrir http://127.0.0.1:8000 dans votre navigateur
 ```
 
 Formats de rapport disponibles : `md` (défaut), `csv`, `html`.
@@ -187,7 +191,8 @@ news-intell/
 │   ├── sources/rss.py       # Collecte des flux RSS/Atom
 │   ├── agents/              # Agents IA + coordinateur
 │   ├── agents/pnl/          # Agents PNL (neuro / noir)
-│   └── core/                # Analyste + travailleurs
+│   ├── core/                # Analyste + travailleurs
+│   └── web/                 # Interface web (FastAPI) + administration
 ├── tests/                   # Tests unitaires
 ├── .github/
 │   ├── ISSUE_TEMPLATE/      # Modèles d'issues (bug, fonctionnalité)
@@ -228,6 +233,22 @@ Un rapport Markdown ressemble à :
 ```bash
 python -m unittest discover -s tests
 ```
+
+## 🌐 Interface web
+
+Le serveur web (FastAPI) propose deux volets, **en français** :
+
+- **Public (journaliste)** : accueil, recherche, fiche article (thème, sentiment,
+  entités, lecture comportementale PNL, note d'analyse).
+- **Administration** (`/admin`) : statistiques, lancement d'une analyse en
+  arrière-plan, édition de la configuration (`/admin/config`).
+
+```bash
+python -m news_intell.cli serveur --port 8000
+```
+
+> Le panneau admin permet de déclencher une analyse et de modifier la
+> configuration (`config/config.yaml`) directement depuis le navigateur.
 
 ## 📦 Publication de releases
 

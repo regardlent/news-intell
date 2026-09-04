@@ -19,6 +19,9 @@ de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
   locaux.
 - Ajout de l'**analyse sémantique** : déduplication et regroupement d'articles
   via les embeddings (`news_intell/semantic.py`).
+- Ajout de l'**interface web** (FastAPI + Jinja2) : lecture journalistique,
+  recherche et panneau d'administration (lancement d'analyses, configuration).
+- Commande CLI `serveur` pour lancer l'interface web.
 
 ### Prévu
 

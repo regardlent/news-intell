@@ -71,6 +71,26 @@ class LocalAIClient:
         except requests.RequestException as exc:
             raise RuntimeError(f"Erreur d'appel LocalAI (embedding) : {exc}") from exc
 
+    def reranker(self, requete: str, documents: list[str]) -> list[float]:
+        """Classe les documents par pertinence pour une requête (modèle reranker)."""
+        payload = {
+            "model": self._config.modele_reranker,
+            "query": requete,
+            "documents": documents,
+        }
+        try:
+            reponse = self._session.post(
+                f"{self._base}/v1/rerank",
+                headers=self._headers,
+                json=payload,
+                timeout=self._config.timeout,
+            )
+            reponse.raise_for_status()
+            donnees = reponse.json()
+            return [float(r["relevance_score"]) for r in donnees.get("results", [])]
+        except requests.RequestException as exc:
+            raise RuntimeError(f"Erreur d'appel LocalAI (reranker) : {exc}") from exc
+
     def lister_modeles(self) -> list[dict[str, Any]]:
         """Liste les modèles chargés sur le serveur LocalAI."""
         try:

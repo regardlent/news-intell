@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block titre %}{{ a.titre }}{% endblock %}
+{% block contenu %}
+<article class="article">
+  <p class="meta">{{ a.source }}{% if a.date_publication %} · {{ a.date_publication }}{% endif %} · Groupe {{ a.groupe or '—' }}</p>
+  <h1>{{ a.titre }}</h1>
+  <p class="etiquette">{{ a.thematique or 'Divers' }} · {{ a.sentiment }} ({{ '%.2f'|format(a.score_sentiment) }}) · Pertinence {{ '%.2f'|format(a.pertinence) }}</p>
+
+  {% if a.resume_ia %}<p class="resume">{{ a.resume_ia }}</p>{% endif %}
+  {% if a.note_analyste %}<h2>Note d'analyse</h2><p>{{ a.note_analyste }}</p>{% endif %}
+
+  {% if a.mot_cle %}<h2>Mots-clés</h2><p>{{ a.mot_cle | join(', ') }}</p>{% endif %}
+  {% if a.categories %}<p>Catégories : {{ a.categories | join(', ') }}</p>{% endif %}
+
+  {% if a.entites %}
+  <h2>Entités</h2>
+  <ul>
+    {% if a.entites.personnes %}<li>Personnes : {{ a.entites.personnes | join(', ') }}</li>{% endif %}
+    {% if a.entites.organisations %}<li>Organisations : {{ a.entites.organisations | join(', ') }}</li>{% endif %}
+    {% if a.entites.lieux %}<li>Lieux : {{ a.entites.lieux | join(', ') }}</li>{% endif %}
+  </ul>
+  {% endif %}
+
+  {% if a.pnl %}
+  <h2>Lecture comportementale (PNL)</h2>
+  <table class="pnl">
+    <tr><th>Score de manipulation</th><td>{{ '%.2f'|format(a.pnl.score_manipulation) }} ({{ a.pnl.niveau_manipulation }})</td></tr>
+    {% if a.pnl.boutons_chauds %}<tr><th>Déclencheurs émotionnels</th><td>{{ a.pnl.boutons_chauds | join(', ') }}</td></tr>{% endif %}
+    {% if a.pnl.neuro %}
+    <tr><th>Techniques constructives (neuro)</th><td><ul>{% for n in a.pnl.neuro %}<li>{{ n.technique }}</li>{% endfor %}</ul></td></tr>
+    {% endif %}
+    {% if a.pnl.noir %}
+    <tr><th>Manipulations détectées (noir)</th><td><ul>{% for n in a.pnl.noir %}<li>{{ n.technique }}</li>{% endfor %}</ul></td></tr>
+    {% endif %}
+  </table>
+  {% endif %}
+
+  {% if a.url %}<p class="source-link">Source : <a href="{{ a.url }}" target="_blank" rel="noopener">{{ a.url }}</a></p>{% endif %}
+  <p><a href="/">← Retour à l'accueil</a></p>
+</article>
+{% endblock %}

@@ -5,6 +5,7 @@ Usage :
     python -m news_intell.cli analyser --fichier data/articles.json
     python -m news_intell.cli executer --format md
     python -m news_intell.cli lister-modeles
+    python -m news_intell.cli serveur --hote 127.0.0.1 --port 8000
 """
 from __future__ import annotations
 
@@ -75,6 +76,26 @@ def cmd_lister_modeles(_args) -> int:
     return 0
 
 
+def cmd_serveur(args) -> int:
+    """Lance l'interface web (FastAPI + uvicorn)."""
+    try:
+        import uvicorn  # noqa: WPS433
+    except ImportError as exc:  # noqa: BLE001, F821
+        print(
+            f"✖ Dépendance manquante pour le serveur web : {exc}. "
+            "Installez « pip install -e .[web] ».",
+            file=sys.stderr,
+        )
+        return 1
+    uvicorn.run(
+        "news_intell.web.app:app",
+        host=args.hote,
+        port=args.port,
+        reload=args.recharger,
+    )
+    return 0
+
+
 def construire_parseur() -> argparse.ArgumentParser:
     parseur = argparse.ArgumentParser(
         prog="news-intell",
@@ -111,6 +132,13 @@ def construire_parseur() -> argparse.ArgumentParser:
         "lister-modeles", help="Liste les modèles disponibles sur LocalAI."
     )
 
+    parser_serveur = sous.add_parser("serveur", help="Lance l'interface web (FastAPI).")
+    parser_serveur.add_argument("--hote", default="127.0.0.1", help="Adresse d'écoute.")
+    parser_serveur.add_argument("--port", default=8000, type=int, help="Port d'écoute.")
+    parser_serveur.add_argument(
+        "--recharger", action="store_true", help="Rechargement automatique (dev)."
+    )
+
     return parseur
 
 
@@ -122,6 +150,7 @@ def main(argv: list[str] | None = None) -> int:
         "analyser": cmd_analyser,
         "executer": cmd_executer,
         "lister-modeles": cmd_lister_modeles,
+        "serveur": cmd_serveur,
     }
     try:
         return commandes[args.commande](args)

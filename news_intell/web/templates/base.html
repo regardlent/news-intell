@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titre %}news-intell{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='/style.css') }}">
+</head>
+<body>
+  <header class="entete">
+    <div class="contenu-serre">
+      <a class="logo" href="/">news-intell<span>.</span></a>
+      <nav class="menu">
+        <a href="/">Accueil</a>
+        <a href="/recherche">Recherche</a>
+        <a href="/admin">Administration</a>
+      </nav>
+    </div>
+  </header>
+  <main class="contenu">
+    {% block contenu %}{% endblock %}
+  </main>
+  <footer class="pied">
+    <div class="contenu-serre">
+      <p>Analyse intelligente de l'actualité par des agents IA (LocalAI).</p>
+    </div>
+  </footer>
+  <script src="{{ url_for('static', path='/app.js') }}"></script>
+</body>
+</html>

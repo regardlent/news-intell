@@ -32,6 +32,11 @@ dependencies = [
 dev = [
   "ruff>=0.4",
 ]
+web = [
+  "fastapi>=0.115",
+  "uvicorn[standard]>=0.30",
+  "jinja2>=3.1",
+]
 
 [project.urls]
 "Documentation" = "https://github.com/regardlent/news-intell#readme"
@@ -44,6 +49,9 @@ news-intell = "news_intell.cli:main"
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["news_intell", "news_intell.*"]
+
+[tool.setuptools.package-data]
+"news_intell.web" = ["templates/**/*.html", "static/*"]
 
 [tool.ruff]
 line-length = 100
