@@ -85,7 +85,13 @@ def recuperer_flux(url: str, nom_source: str, timeout: int = 20) -> list[Article
         reponse = requests.get(
             url,
             timeout=timeout,
-            headers={"User-Agent": "news-intell/1.0"},
+            headers={
+                "User-Agent": (
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                    "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+                ),
+                "Accept": "application/rss+xml, application/atom+xml, application/xml, */*",
+            },
         )
         reponse.raise_for_status()
         reponse.encoding = reponse.apparent_encoding or "utf-8"

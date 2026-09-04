@@ -26,6 +26,9 @@ de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
   **API JSON** (`/api/articles`, `/api/recherche`, `/api/article/{cle}`).
 - Panneau d'**administration** enrichi : statistiques, **export CSV** et
   **planification périodique** des analyses.
+- Enrichissement des **sources RSS francophones** (8 médias vérifiés : Le Monde,
+  France 24, France Info, Le Figaro, RFI, Ouest-France, Sud Ouest, Marianne) et
+  User-Agent navigateur pour améliorer la récupération des flux.
 
 ### Prévu
 
