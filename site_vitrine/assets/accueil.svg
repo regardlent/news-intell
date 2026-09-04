@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560" font-family="Georgia, serif">
+  <rect width="900" height="560" fill="#faf7f2"/>
+  <rect height="52" width="900" fill="#1a1a1a"/>
+  <text x="24" y="34" fill="#f5f1e8" font-size="22" font-weight="bold">news-intell.</text>
+  <text x="600" y="34" fill="#ddd" font-family="sans-serif" font-size="13">Accueil    Recherche    Admin</text>
+  <rect x="40" y="80" width="820" height="92" rx="8" fill="#fff" stroke="#e2ddd5"/>
+  <text x="60" y="122" fill="#1a1a1a" font-size="24">L'actualité, décryptée par des agents IA</text>
+  <text x="60" y="148" fill="#4a4a4a" font-family="sans-serif" font-size="13">Thèmes, sentiments, entités et lecture comportementale (PNL) pour chaque article.</text>
+  <g font-family="sans-serif">
+    <rect x="40" y="200" width="250" height="150" rx="8" fill="#fff" stroke="#e2ddd5"/>
+    <rect x="56" y="216" width="80" height="18" rx="4" fill="#eee"/>
+    <text x="64" y="230" fill="#4a4a4a" font-size="11">Climat</text>
+    <text x="56" y="260" fill="#1a1a1a" font-size="15" font-weight="bold">Inondations au Népal</text>
+    <text x="56" y="284" fill="#4a4a4a" font-size="12">Le pays réclame plus de justice climatique…</text>
+    <rect x="310" y="200" width="250" height="150" rx="8" fill="#fff" stroke="#e2ddd5"/>
+    <rect x="326" y="216" width="80" height="18" rx="4" fill="#eee"/>
+    <text x="334" y="230" fill="#4a4a4a" font-size="11">Agriculture</text>
+    <text x="326" y="260" fill="#1a1a1a" font-size="15" font-weight="bold">Plan pour les agriculteurs</text>
+    <text x="326" y="284" fill="#4a4a4a" font-size="12">Sécheresse et canicules…</text>
+    <rect x="580" y="200" width="250" height="150" rx="8" fill="#fff" stroke="#e2ddd5"/>
+    <rect x="596" y="216" width="80" height="18" rx="4" fill="#eee"/>
+    <text x="604" y="230" fill="#4a4a4a" font-size="11">Éducation</text>
+    <text x="596" y="260" fill="#1a1a1a" font-size="15" font-weight="bold">Rentrée sans portables</text>
+    <text x="596" y="284" fill="#4a4a4a" font-size="12">Interdiction étendue aux lycées…</text>
+  </g>
+  <rect y="520" width="900" height="40" fill="#1a1a1a"/>
+  <text x="24" y="545" fill="#aaa" font-family="sans-serif" font-size="11">news-intell — veille intelligente</text>
+</svg>

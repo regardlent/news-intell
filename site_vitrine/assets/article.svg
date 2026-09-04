@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560" font-family="Georgia, serif">
+  <rect width="900" height="560" fill="#fff"/>
+  <rect height="52" width="900" fill="#1a1a1a"/>
+  <text x="24" y="34" fill="#f5f1e8" font-size="20" font-weight="bold">news-intell.</text>
+  <text x="60" y="96" fill="#1a1a1a" font-size="26" font-weight="bold">Le Népal réclame plus de justice climatique</text>
+  <text x="60" y="122" fill="#4a4a4a" font-family="sans-serif" font-size="13">Le Monde · Climat · Sentiment : neutre · Pertinence 0.5</text>
+  <text x="60" y="156" fill="#1a1a1a" font-family="sans-serif" font-size="14">Le tsunami de boue et de glace a dévasté le pays en août. Les dégâts atteindraient 4 à 5 milliards de dollars, affectant le tourisme et l'hydroélectricité.</text>
+  <text x="60" y="220" fill="#1a1a1a" font-size="18" font-weight="bold">Lecture comportementale (PNL)</text>
+  <g font-family="sans-serif">
+    <rect x="60" y="240" width="780" height="30" fill="#f0ece4"/>
+    <text x="72" y="260" fill="#1a1a1a" font-size="13">Score de manipulation : <tspan font-weight="bold">0.10</tspan> (faible)</text>
+    <rect x="60" y="278" width="780" height="30" fill="#f8f6f2"/>
+    <text x="72" y="298" fill="#1a1a1a" font-size="13">Techniques « neuro » : narration, recadrage</text>
+    <rect x="60" y="316" width="780" height="30" fill="#f0ece4"/>
+    <text x="72" y="336" fill="#1a1a1a" font-size="13">Manipulations « noir » : urgence, appel à la peur</text>
+    <rect x="60" y="354" width="780" height="30" fill="#f8f6f2"/>
+    <text x="72" y="374" fill="#1a1a1a" font-size="13">Déclencheurs émotionnels : peur, urgence</text>
+  </g>
+  <text x="60" y="430" fill="#1a1a1a" font-size="18" font-weight="bold">Note d'analyse</text>
+  <text x="60" y="458" fill="#4a4a4a" font-family="sans-serif" font-size="13">L'article met l'accent sur l'impact économique et l'appel à la justice climatique, avec un ton factuel souligné par un sentiment d'urgence.</text>
+</svg>

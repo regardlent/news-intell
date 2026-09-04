@@ -27,6 +27,14 @@ a{color:inherit;text-decoration:none}
 .etapes{max-width:560px;margin:0 auto;list-style:none;padding:0}
 .etapes li{padding:.8rem 0;border-bottom:1px solid var(--bord)}
 .etapes strong{color:var(--accent2)}
+.captures{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-top:1rem}
+.captures figure{margin:0;background:var(--carte);border:1px solid var(--bord);border-radius:10px;overflow:hidden}
+.captures img{width:100%;display:block}
+.captures figcaption{font-size:.85rem;color:#9aa;padding:.6rem .8rem}
+.demo{text-align:left}
+.demo article p.pied-carte{font-size:.85rem;color:#9aa}
+.demo-info{text-align:center;color:#9aa;margin-top:1rem}
+code{background:#22262e;padding:.15rem .4rem;border-radius:4px;color:#f0a500}
 .prix{font-size:1.6rem;font-weight:700;color:var(--accent2);margin:.4rem 0}
 .cartes .populaire{border-color:var(--accent2);box-shadow:0 0 0 1px var(--accent2)}
 .contact{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;margin-top:1rem}

@@ -7,9 +7,11 @@ from __future__ import annotations
 
 import csv
 import io
+import os
 from pathlib import Path
 
 from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -57,6 +59,18 @@ def _lancer_analyse() -> str:
 def creer_app() -> FastAPI:
     app = FastAPI(title="news-intell", version="0.1.0")
     app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+
+    origines = [
+        o.strip()
+        for o in os.environ.get("CORS_ORIGINS", "*").split(",")
+        if o.strip()
+    ]
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origines,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
     # --- Public : interface journalistique ---
     @app.get("/", response_class=HTMLResponse)

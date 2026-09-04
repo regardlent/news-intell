@@ -260,8 +260,10 @@ python -m news_intell.cli serveur --port 8000
 > configuration (`config/config.yaml`) directement depuis le navigateur.
 
 Un **site vitrine** de présentation/vente est fourni dans `site_vitrine/`
-(landing page statique). Voir `docs/equipe_dev.md` pour l'équipe de développement.
-Il peut être publié sur **GitHub Pages** (`.github/workflows/vitrine.yml`).
+(landing page statique, avec **maquettes SVG** dans `assets/` et une section
+**« Démo en direct »** branchée sur l'API). Voir `docs/equipe_dev.md` pour
+l'équipe de développement. Il peut être publié sur **GitHub Pages**
+(`.github/workflows/vitrine.yml`).
 
 Pour générer **rapidement** un petit jeu d'articles analysés (sans lancer
 l'analyse complète) :

@@ -40,6 +40,8 @@ de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
   (`scripts/entrainer_modele.py`) + documentation `docs/modele.md`.
 - Déploiement du **site vitrine** sur GitHub Pages
   (`.github/workflows/vitrine.yml`).
+- Site vitrine enrichi : **maquettes SVG** (`site_vitrine/assets/`) et section
+  **« Démo en direct »** branchée sur l'API (CORS activé sur le serveur web).
 
 ### Prévu
 
