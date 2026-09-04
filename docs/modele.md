@@ -50,3 +50,33 @@ python scripts/entrainer_modele.py exporter
 - Ajuster `modele_personnalise.nom` et `chemin` après l'export GGUF.
 - Le repli `localai` reste utilisable ; le backend `personnalise` s'active
   lorsque vous avez votre modèle.
+
+## Activer le modèle personnalisé
+
+Le backend `personnalise` charge un GGUF en mémoire via `llama-cpp-python`.
+
+```bash
+pip install llama-cpp-python
+```
+
+> ⚠️ Sur certaines machines, la **compilation depuis les sources échoue**
+> (bug de packaging `ChatAttachments...svelte`). Solutions :
+> - utiliser une **roue précompilée** (`pip install llama-cpp-python --prefer-binary`
+>   ou un index de roues communautaires) ;
+> - installer les **outils de build MSVC + CMake** ;
+> - ou exécuter l'installation sur une machine disposant d'un outillage de build.
+
+Puis renseignez `modele_personnalise.chemin` (votre GGUF) et réglez `backend: "personnalise"`.
+
+## Optimisation pour votre matériel
+
+`scripts/diagnostiquer_materiel.py` détecte CPU / RAM / VRAM (GPU NVIDIA) et
+**recommande** la taille/quantisation du modèle et les réglages
+(`nb_threads`, `contexte`, `gpu_couches`) adaptés. Le fichier généré
+`config/config.local.yaml` surcharge `config.yaml`.
+
+```bash
+python scripts/diagnostiquer_materiel.py            # rapport + recommandation
+python scripts/diagnostiquer_materiel.py --ecrire   # écrit config/config.local.yaml
+```
+

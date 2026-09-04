@@ -28,3 +28,6 @@ data/*
 .coverage
 htmlcov/
 
+# --- Profil matériel généré (personnel) ---
+config/config.local.yaml
+

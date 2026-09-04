@@ -44,6 +44,10 @@ de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
   **« Démo en direct »** branchée sur l'API (CORS activé sur le serveur web).
 - **Authentification** du panneau `/admin` (mot de passe + session) et
   **graphiques** en barres dans le tableau de bord.
+- **Optimisation matériel** : détection CPU/RAM/VRAM
+  (`scripts/diagnostiquer_materiel.py`), réglages `llm` (threads, contexte,
+  couches GPU) câblés dans le backend `personnalise`, et profil
+  `config/config.local.yaml` (non versionné).
 
 ### Prévu
 

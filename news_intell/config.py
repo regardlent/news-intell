@@ -17,6 +17,7 @@ import yaml
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 CONFIG_PATH = PROJECT_ROOT / "config" / "config.yaml"
+CONFIG_LOCAL_PATH = PROJECT_ROOT / "config" / "config.local.yaml"
 ENV_PATH = PROJECT_ROOT / ".env"
 
 
@@ -30,6 +31,17 @@ def _charger_env(chemin: Path) -> None:
             continue
         cle, valeur = ligne.split("=", 1)
         os.environ.setdefault(cle.strip(), valeur.strip().strip('"').strip("'"))
+
+
+def _fusionner(base: dict[str, Any], surcouche: dict[str, Any]) -> dict[str, Any]:
+    """Fusionne une surcouche de configuration par-dessus une configuration de base."""
+    resultat = dict(base)
+    for cle, valeur in surcouche.items():
+        if isinstance(valeur, dict) and isinstance(resultat.get(cle), dict):
+            resultat[cle] = _fusionner(resultat[cle], valeur)
+        else:
+            resultat[cle] = valeur
+    return resultat
 
 
 @dataclass
@@ -69,6 +81,7 @@ class Config:
     clustering_active: bool = True
     clustering_seuil: float = 0.7
     admin: dict[str, Any] = field(default_factory=dict)
+    llm: dict[str, Any] = field(default_factory=dict)
 
     @classmethod
     def charger(cls) -> "Config":
@@ -78,6 +91,11 @@ class Config:
         donnees: dict[str, Any] = {}
         if CONFIG_PATH.exists():
             donnees = yaml.safe_load(CONFIG_PATH.read_text(encoding="utf-8")) or {}
+
+        # Profil matériel optionnel (config/config.local.yaml) : surcharge la base.
+        if CONFIG_LOCAL_PATH.exists():
+            locale = yaml.safe_load(CONFIG_LOCAL_PATH.read_text(encoding="utf-8")) or {}
+            donnees = _fusionner(donnees, locale)
 
         agents = {
             nom: AgentConfig.depuis_dict(v)
@@ -126,4 +144,5 @@ class Config:
             clustering_active=clustering_active,
             clustering_seuil=clustering_seuil,
             admin=donnees.get("admin", {}),
+            llm=donnees.get("llm", {}),
         )

@@ -9,6 +9,7 @@ Le backend s'active via `config.backend`.
 """
 from __future__ import annotations
 
+import os
 from abc import ABC, abstractmethod
 from typing import Any
 
@@ -60,11 +61,28 @@ class ModelePersonnalise(InterfaceLLM):
             ) from exc
 
         reglages = config.modele_personnalise or {}
+        reglages_llm = config.llm or {}
         chemin = reglages.get("chemin", "")
         if not chemin:
             raise RuntimeError("modele_personnalise.chemin est requis (chemin vers un .gguf).")
 
-        self._llm = Llama(model_path=str(chemin), n_ctx=4096)
+        n_ctx = int(reglages_llm.get("contexte", 8192))
+        n_threads = int(reglages_llm.get("nb_threads", os.cpu_count() or 4))
+        n_gpu = int(reglages_llm.get("gpu_couches", 0))
+        try:
+            self._llm = Llama(
+                model_path=str(chemin),
+                n_ctx=n_ctx,
+                n_threads=n_threads,
+                n_gpu_layers=n_gpu,
+            )
+        except Exception:  # noqa: BLE001 — repli CPU si l'offchargement GPU échoue
+            self._llm = Llama(
+                model_path=str(chemin),
+                n_ctx=n_ctx,
+                n_threads=n_threads,
+                n_gpu_layers=0,
+            )
         self._modele = reglages.get("nom", str(chemin))
 
     @staticmethod

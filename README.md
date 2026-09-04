@@ -167,6 +167,10 @@ rigoureux et nuancé). Le **moteur de modèle** est **pluggable**
 Un **pipeline d'entraînement** (`scripts/entrainer_modele.py`) permet de
 « cultiver » votre propre modèle sur vos données ; voir [`docs/modele.md`](docs/modele.md).
 
+Un **outil de diagnostic matériel** (`scripts/diagnostiquer_materiel.py`) détecte
+CPU / RAM / VRAM et **recommande** les réglages du modèle local (taille,
+quantisation, threads, contexte, couches GPU) adaptés à votre machine.
+
 L'**analyse sémantique** complète le tout :
 
 - **Déduplication** (`news_intell/semantic.py`) : supprime les articles quasi

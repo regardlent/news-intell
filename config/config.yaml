@@ -27,6 +27,13 @@ modele_personnalise:
 admin:
   mot_de_passe: "news-intell"
 
+# Réglages du moteur local (backend "personnalise"), optimisés pour un PC type.
+# Ajustez nb_threads (cœurs), contexte et gpu_couches (999 = tout sur GPU, 0 = CPU).
+llm:
+  nb_threads: 16
+  contexte: 8192
+  gpu_couches: 999
+
 # Modèles utilisés (déjà chargés/nommés sur votre serveur).
 modele_embedding: "hal-qwen3-embedding-0.6b"
 modele_reranker: "jina-reranker-v1-base-en"
