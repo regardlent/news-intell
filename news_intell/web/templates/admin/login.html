@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block titre %}Connexion — Administration{% endblock %}
+{% block contenu %}
+<div class="connexion">
+  <h1>Connexion</h1>
+  <p>Accès réservé à l'administration.</p>
+  {% if erreur %}<p class="erreur">{{ erreur }}</p>{% endif %}
+  <form class="formulaire" method="post" action="/admin/login">
+    <input type="password" name="mot_de_passe" placeholder="Mot de passe" required autofocus>
+    <button type="submit">Se connecter</button>
+  </form>
+  <p><a href="/">← Retour à l'accueil</a></p>
+</div>
+{% endblock %}

@@ -36,6 +36,8 @@ web = [
   "fastapi>=0.115",
   "uvicorn[standard]>=0.30",
   "jinja2>=3.1",
+  "itsdangerous>=2.0",
+  "python-multipart>=0.0.9",
 ]
 
 [project.urls]

@@ -259,6 +259,9 @@ python -m news_intell.cli serveur --port 8000
 > Le panneau admin permet de déclencher une analyse et de modifier la
 > configuration (`config/config.yaml`) directement depuis le navigateur.
 
+Le panneau `/admin` est protégé par un **mot de passe** (`admin.mot_de_passe`
+dans `config.yaml` ou env `ADMIN_PASSWORD`) ; connectez-vous via `/admin/login`.
+
 Un **site vitrine** de présentation/vente est fourni dans `site_vitrine/`
 (landing page statique, avec **maquettes SVG** dans `assets/` et une section
 **« Démo en direct »** branchée sur l'API). Voir `docs/equipe_dev.md` pour

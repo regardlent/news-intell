@@ -68,6 +68,7 @@ class Config:
     dedupe_seuil: float = 0.9
     clustering_active: bool = True
     clustering_seuil: float = 0.7
+    admin: dict[str, Any] = field(default_factory=dict)
 
     @classmethod
     def charger(cls) -> "Config":
@@ -124,4 +125,5 @@ class Config:
             dedupe_seuil=dedupe_seuil,
             clustering_active=clustering_active,
             clustering_seuil=clustering_seuil,
+            admin=donnees.get("admin", {}),
         )

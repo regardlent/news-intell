@@ -10,14 +10,22 @@ import io
 import os
 from pathlib import Path
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Form, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from starlette.middleware.sessions import SessionMiddleware
 
 from ..config import Config
 from ..llm import InterfaceLLM, creer_llm
+from .auth import (
+    deconnecter,
+    est_authentifie,
+    marquer_authentifie,
+    secret_session,
+    verifier_mot_de_passe,
+)
 from .config_store import ConfigStore
 from .planificateur import planificateur
 from .recherche import rechercher_semantique, rechercher_texte
@@ -46,6 +54,12 @@ def _obtenir_client() -> InterfaceLLM:
     return _client_cache
 
 
+def _exiger_admin(request: Request) -> None:
+    """Redirige vers la connexion si l'administrateur n'est pas authentifié."""
+    if not est_authentifie(request):
+        raise HTTPException(status_code=303, headers={"Location": "/admin/login"})
+
+
 def _lancer_analyse() -> str:
     """Exécute le pipeline complet (analyse) en arrière-plan."""
     config = Config.charger()
@@ -71,6 +85,36 @@ def creer_app() -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"],
     )
+    app.add_middleware(
+        SessionMiddleware,
+        secret_key=secret_session(),
+        same_site="lax",
+    )
+
+    @app.get("/admin/login", response_class=HTMLResponse)
+    def admin_login(request: Request, erreur: str = ""):
+        if est_authentifie(request):
+            return RedirectResponse("/admin", status_code=303)
+        return templates.TemplateResponse(
+            request, "admin/login.html", {"erreur": erreur}
+        )
+
+    @app.post("/admin/login")
+    def admin_connexion(request: Request, mot_de_passe: str = Form(default="")):
+        if verifier_mot_de_passe(mot_de_passe):
+            marquer_authentifie(request)
+            return RedirectResponse("/admin", status_code=303)
+        return templates.TemplateResponse(
+            request,
+            "admin/login.html",
+            {"erreur": "Mot de passe incorrect."},
+            status_code=401,
+        )
+
+    @app.get("/admin/logout")
+    def admin_logout(request: Request):
+        deconnecter(request)
+        return RedirectResponse("/admin/login", status_code=303)
 
     # --- Public : interface journalistique ---
     @app.get("/", response_class=HTMLResponse)
@@ -156,6 +200,7 @@ def creer_app() -> FastAPI:
     # --- Administration ---
     @app.get("/admin", response_class=HTMLResponse)
     def admin_index(request: Request):
+        _exiger_admin(request)
         config = Config.charger()
         return templates.TemplateResponse(
             request,
@@ -171,6 +216,7 @@ def creer_app() -> FastAPI:
 
     @app.get("/admin/config", response_class=HTMLResponse)
     def admin_config(request: Request):
+        _exiger_admin(request)
         return templates.TemplateResponse(
             request,
             "admin/config.html",
@@ -179,6 +225,7 @@ def creer_app() -> FastAPI:
 
     @app.post("/admin/config")
     async def admin_config_sauver(request: Request):
+        _exiger_admin(request)
         texte = (await request.body()).decode("utf-8")
         try:
             config_store.sauvegarder_yaml(texte)
@@ -187,20 +234,24 @@ def creer_app() -> FastAPI:
         return JSONResponse({"ok": True})
 
     @app.post("/admin/analyser")
-    def admin_analyser():
+    def admin_analyser(request: Request):
+        _exiger_admin(request)
         identifiant = taches.lancer(_lancer_analyse)
         return JSONResponse({"id": identifiant, "statut": "en_cours"})
 
     @app.get("/admin/taches/{identifiant}")
-    def admin_tache(identifiant: str):
+    def admin_tache(request: Request, identifiant: str):
+        _exiger_admin(request)
         return JSONResponse(taches.statut(identifiant) or {"statut": "inconnu", "resultat": ""})
 
     @app.get("/admin/actualiser")
-    def admin_actualiser():
+    def admin_actualiser(request: Request):
+        _exiger_admin(request)
         return RedirectResponse("/admin", status_code=303)
 
     @app.post("/admin/planifier")
-    def admin_planifier(intervalle: int = 60):
+    def admin_planifier(request: Request, intervalle: int = 60):
+        _exiger_admin(request)
         try:
             planificateur.demarrer(intervalle, _lancer_analyse)
         except ValueError as exc:
@@ -208,7 +259,8 @@ def creer_app() -> FastAPI:
         return JSONResponse({"ok": True, "intervalle": intervalle, "statut": "actif"})
 
     @app.get("/admin/planification")
-    def admin_planification():
+    def admin_planification(request: Request):
+        _exiger_admin(request)
         return JSONResponse({
             "actif": planificateur.actif(),
             "intervalle": planificateur.intervalle,

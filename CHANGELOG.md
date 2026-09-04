@@ -42,6 +42,8 @@ de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
   (`.github/workflows/vitrine.yml`).
 - Site vitrine enrichi : **maquettes SVG** (`site_vitrine/assets/`) et section
   **« Démo en direct »** branchée sur l'API (CORS activé sur le serveur web).
+- **Authentification** du panneau `/admin` (mot de passe + session) et
+  **graphiques** en barres dans le tableau de bord.
 
 ### Prévu
 

@@ -34,6 +34,17 @@ a:hover{text-decoration:underline}
 .pnl{border-collapse:collapse;width:100%}
 .pnl th,.pnl td{border:1px solid var(--bord);padding:.5rem;text-align:left;vertical-align:top}
 .pnl th{background:#f0ece4;width:220px}
+.connexion{max-width:420px;margin:2rem auto;background:var(--carte);border:1px solid var(--bord);border-radius:10px;padding:2rem;text-align:center}
+.formulaire{display:flex;flex-direction:column;gap:.8rem;margin-top:1rem}
+.formulaire input{padding:.7rem 1rem;border:1px solid var(--bord);border-radius:8px;background:var(--fond);color:var(--texte)}
+.formulaire button{background:var(--accent);border:0;padding:.7rem 1rem;border-radius:8px;color:#fff;font-weight:600;cursor:pointer}
+.erreur{color:#e05555}
+.barres{display:grid;gap:.5rem;margin-top:.5rem}
+.barre{display:flex;align-items:center;gap:.6rem}
+.barre .libelle{width:120px;font-size:.85rem;color:#cfd3dc;text-align:right}
+.barre .piste{flex:1;background:#262b35;border-radius:6px;overflow:hidden;height:16px}
+.barre .remplir{display:block;height:100%;background:var(--accent);border-radius:6px}
+.barre .valeur{width:34px;font-size:.85rem;color:#9aa}
 .admin-stats{display:flex;gap:1rem;margin:1rem 0}
 .stat{background:var(--carte);border:1px solid var(--bord);padding:1rem;flex:1;text-align:center}
 .stat strong{display:block;font-size:1.8rem;color:var(--accent)}

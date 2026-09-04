@@ -27,6 +27,7 @@ forte attention à la simplicité et à la lisibilité.
 - [x] Moteur de modèle **pluggable** (LocalAI ou modèle local personnalisé).
 - [x] **Site vitrine** de vente + équipe de dev documentée.
 - [x] Pipeline d'entraînement du modèle personnalisé + déploiement du vitrine (Pages).
+- [x] Authentification du panneau d'administration + graphiques du tableau de bord.
 
 ### Phase 3 — Exploitation (à venir 📅)
 - [x] Planification automatique des analyses (tâche périodique via l'admin).

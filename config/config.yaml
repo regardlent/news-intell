@@ -22,6 +22,11 @@ modele_personnalise:
   nom: "news-intell-expert"
   chemin: "/chemin/vers/mon-modele.gguf"
 
+# Administration : mot de passe (à changer !) + secret de session (via env SESSION_SECRET).
+# Le mot de passe peut aussi être fourni par la variable d'environnement ADMIN_PASSWORD.
+admin:
+  mot_de_passe: "news-intell"
+
 # Modèles utilisés (déjà chargés/nommés sur votre serveur).
 modele_embedding: "hal-qwen3-embedding-0.6b"
 modele_reranker: "jina-reranker-v1-base-en"

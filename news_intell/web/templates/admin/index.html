@@ -28,6 +28,13 @@
   <ul class="comptes">{% for nom, nb in stats.par_source %}<li>{{ nom }} ({{ nb }})</li>{% endfor %}</ul>
   <h3>Par thème</h3>
   <ul class="comptes">{% for nom, nb in stats.par_theme %}<li>{{ nom }} ({{ nb }})</li>{% endfor %}</ul>
+  <h3>Distribution — thèmes</h3>
+  {% set max_theme = stats.par_theme[0][1] %}
+  <div class="barres">
+    {% for nom, nb in stats.par_theme %}
+    <div class="barre"><span class="libelle">{{ nom }}</span><span class="piste"><span class="remplir" style="width: {{ (100 * nb / max_theme) | round }}%"></span></span><span class="valeur">{{ nb }}</span></div>
+    {% endfor %}
+  </div>
   <h3>Par sentiment</h3>
   <ul class="comptes">{% for nom, nb in stats.par_sentiment %}<li>{{ nom }} ({{ nb }})</li>{% endfor %}</ul>
   {% if stats.mots_courants %}<h3>Mots-clés courants</h3><ul class="comptes">{% for mot, nb in stats.mots_courants %}<li>{{ mot }} ({{ nb }})</li>{% endfor %}</ul>{% endif %}
