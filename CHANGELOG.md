@@ -29,6 +29,8 @@ de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 - Enrichissement des **sources RSS francophones** (8 médias vérifiés : Le Monde,
   France 24, France Info, Le Figaro, RFI, Ouest-France, Sud Ouest, Marianne) et
   User-Agent navigateur pour améliorer la récupération des flux.
+- Script `scripts/generer_exemple.py` pour générer rapidement un petit jeu
+  d'articles analysés (alimente l'interface sans lancer l'analyse complète).
 
 ### Prévu
 
