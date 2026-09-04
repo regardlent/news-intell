@@ -4,8 +4,6 @@ Il orchestre l'exécution des agents sur chaque article et agrège le résultat.
 """
 from __future__ import annotations
 
-from typing import Any
-
 from ..client import LocalAIClient
 from ..config import Config
 from ..models import AnalyseArticle, Article

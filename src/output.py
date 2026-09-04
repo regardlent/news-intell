@@ -51,9 +51,9 @@ def _rapport_markdown(resultats: list["AnalyseArticle"], chemin: Path) -> None:
             lignes.append(f"\n**Résumé** : {r.resume_ia}\n")
         if r.mot_cle:
             lignes.append(f"**Mots-clés** : {', '.join(r.mot_cle)}\n")
-        personnes = ", ".join(r.entites.get("personnes", [])) if r.entites.get("personnes") else "n/a"
-        organisations = ", ".join(r.entites.get("organisations", [])) if r.entites.get("organisations") else "n/a"
-        lieux = ", ".join(r.entites.get("lieux", [])) if r.entites.get("lieux") else "n/a"
+        personnes = ", ".join(r.entites.get("personnes", [])) or "n/a"
+        organisations = ", ".join(r.entites.get("organisations", [])) or "n/a"
+        lieux = ", ".join(r.entites.get("lieux", [])) or "n/a"
         lignes.append(f"**Personnes** : {personnes}")
         lignes.append(f"**Organisations** : {organisations}")
         lignes.append(f"**Lieux** : {lieux}")

@@ -1,6 +1,6 @@
+# Workflow d'intégration continue : tests unitaires et qualité de code.
 name: Intégration continue
 
-# Ce workflow est déclenché à chaque poussée ou pull request sur la branche main.
 on:
   push:
     branches: [main]
@@ -26,3 +26,21 @@ jobs:
 
       - name: Lancer les tests unitaires
         run: python -m unittest discover -s tests
+
+  qualite:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Vérifier le dépôt
+        uses: actions/checkout@v4
+
+      - name: Configurer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Installer Ruff
+        run: pip install ruff
+
+      - name: Vérifier le style de code
+        run: ruff check .
+

@@ -5,6 +5,8 @@ __pycache__/
 .eggs/
 dist/
 build/
+*.whl
+*.tar.gz
 .venv/
 venv/
 env/
@@ -20,3 +22,9 @@ data/*
 
 # --- Rapports et sorties ---
 *.log
+
+# --- Qualité / couverture ---
+.ruff_cache/
+.coverage
+htmlcov/
+

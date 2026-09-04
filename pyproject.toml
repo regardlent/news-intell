@@ -1,0 +1,57 @@
+# Métadonnées et empaquetage du projet news-intell.
+# Permet l'installation en tant que paquet Python et fournit la commande `news-intell`.
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "news-intell"
+version = "0.1.0"
+description = "Analyse intelligente de l'actualité par des agents IA (LocalAI)."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [
+  { name = "regardlent", email = "regardlent@users.noreply.github.com" },
+]
+keywords = ["news", "ia", "localai", "agents", "analyse"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: Apache Software License",
+  "Operating System :: OS Independent",
+  "Natural Language :: French",
+  "Topic :: Text Processing",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+  "requests>=2.31",
+  "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "ruff>=0.4",
+]
+
+[project.urls]
+"Documentation" = "https://github.com/regardlent/news-intell#readme"
+"Source" = "https://github.com/regardlent/news-intell"
+"Bugs" = "https://github.com/regardlent/news-intell/issues"
+
+[project.scripts]
+news-intell = "src.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src", "src.*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+extend-exclude = ["data", ".venv", "build", "dist"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["E402"]

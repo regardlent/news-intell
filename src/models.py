@@ -5,9 +5,7 @@ Décrit un article de presse et le résultat d'analyse enrichi par les agents.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Any, TypeVar
-
-ArticleT = TypeVar("ArticleT", bound="Article")
+from typing import Any
 
 
 @dataclass

@@ -6,6 +6,13 @@ de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 
 ## [Non publié]
 
+### Ajouts
+
+- Empaquetage Python : `pyproject.toml` avec la commande `news-intell`.
+- Ajout de **Ruff** pour la vérification du style de code (étape de CI).
+- Workflow de publication de releases GitHub (`.github/workflows/publish.yml`).
+- Fichier `.editorconfig` pour des règles d'édition cohérentes.
+
 ### Prévu
 
 - Ajout d'un agent de traduction pour normaliser la langue des articles.

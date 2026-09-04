@@ -28,7 +28,8 @@ forte attention à la simplicité et à la lisibilité.
 - [ ] Planification automatique des analyses (cron / tâche planifiée).
 - [ ] Tableau de bord **HTML** enrichi (filtres, recherche, graphiques).
 - [ ] Alertes sur des sujets ou entités d'intérêt.
-- [ ] Packaging (Docker, `pyproject.toml`, publication PyPI si pertinent).
+- [x] Empaquetage Python (`pyproject.toml`) et workflow de **release GitHub**.
+- [ ] Publication PyPI éventuelle.
 
 ## 💡 Suggestions de la communauté
 

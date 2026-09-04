@@ -20,6 +20,7 @@ compatible OpenAI.
 - [Agents IA](#agents-ia)
 - [Structure du projet](#structure-du-projet)
 - [Exemples de sorties](#exemples-de-sorties)
+- [Publication de releases](#publication-de-releases)
 - [Contribuer](#contribuer)
 - [Licence](#licence)
 
@@ -77,6 +78,9 @@ python -m venv .venv
 source .venv/bin/activate
 
 pip install -r requirements.txt
+
+# Ou installez le projet en mode édition (fournit la commande « news-intell »)
+pip install -e .
 ```
 
 ## ⚙️ Configuration
@@ -113,6 +117,14 @@ python -m src.cli executer --format html
 ```
 
 Formats de rapport disponibles : `md` (défaut), `csv`, `html`.
+
+> 💡 Si le projet est installé en mode édition (`pip install -e .`), la
+> commande équivalente est disponible directement :
+>
+> ```bash
+> news-intell executer --format md
+> news-intell lister-modeles
+> ```
 
 ## 🤖 Agents IA
 
@@ -153,13 +165,15 @@ news-intell/
 │   ├── ISSUE_TEMPLATE/      # Modèles d'issues (bug, fonctionnalité)
 │   ├── PULL_REQUEST_TEMPLATE.md
 │   ├── dependabot.yml
-│   └── workflows/ci.yml     # Intégration continue
+│   └── workflows/           # ci.yml (tests + qualité), publish.yml (release)
 ├── CONTRIBUTING.md          # Guide de contribution
 ├── CODE_OF_CONDUCT.md       # Code de conduite
 ├── SECURITY.md              # Politique de sécurité
 ├── CHANGELOG.md             # Journal des modifications
 ├── ROADMAP.md               # Feuille de route
+├── pyproject.toml           # Empaquetage Python + commande « news-intell »
 ├── requirements.txt
+├── .editorconfig            # Règles d'édition partagées
 ├── .env.example             # Exemple de variables d'environnement
 └── README.md
 ```
@@ -186,6 +200,19 @@ Un rapport Markdown ressemble à :
 ```bash
 python -m unittest discover -s tests
 ```
+
+## 📦 Publication de releases
+
+Lancez une publication en créant un tag versionné à partir de `main` :
+
+```bash
+git tag v0.1.0
+git push origin v0.1.0
+```
+
+Le workflow [`.github/workflows/publish.yml`](.github/workflows/publish.yml) exécute
+les tests, construit le paquet et crée une **release GitHub** avec le paquet
+(`.whl` + `.tar.gz`) en pièce jointe.
 
 ## 🤝 Contribuer
 
