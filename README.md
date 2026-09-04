@@ -171,6 +171,10 @@ Un **outil de diagnostic matériel** (`scripts/diagnostiquer_materiel.py`) déte
 CPU / RAM / VRAM et **recommande** les réglages du modèle local (taille,
 quantisation, threads, contexte, couches GPU) adaptés à votre machine.
 
+Un **script d'installation** (`scripts/installer_modele_local.py`) télécharge un
+GGUF adapté (ex. `qwen2.5-3b` Q4 ≈ 2 Go) et **active automatiquement** le backend
+`personnalise` (sans LocalAI).
+
 L'**analyse sémantique** complète le tout :
 
 - **Déduplication** (`news_intell/semantic.py`) : supprime les articles quasi

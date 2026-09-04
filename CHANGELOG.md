@@ -48,6 +48,8 @@ de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
   (`scripts/diagnostiquer_materiel.py`), réglages `llm` (threads, contexte,
   couches GPU) câblés dans le backend `personnalise`, et profil
   `config/config.local.yaml` (non versionné).
+- Script `scripts/installer_modele_local.py` : téléchargement + configuration
+  automatique d'un GGUF optimisé (backend `personnalise`).
 
 ### Prévu
 

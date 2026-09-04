@@ -68,6 +68,12 @@ pip install llama-cpp-python
 
 Puis renseignez `modele_personnalise.chemin` (votre GGUF) et réglez `backend: "personnalise"`.
 
+**Installation automatique** (télécharge un GGUF adapté + configure) :
+
+```bash
+python scripts/installer_modele_local.py --modele 3b   # ~2 Go, active « personnalise »
+```
+
 ## Optimisation pour votre matériel
 
 `scripts/diagnostiquer_materiel.py` détecte CPU / RAM / VRAM (GPU NVIDIA) et
